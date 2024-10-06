@@ -5,7 +5,7 @@
 
 België telt zo een 50.000 bewakingscamera's volgens de privacy comissie (geen echte bron, ruwe schatting), maar zij beweren dat dit een understatement van 50% is.
 Een groot deel daarvan zijn eigendom van de politie. Deze worden voornamelijk gebruikt om na de feiten specifieke timeframes te onderzoeken.
-Na een eerste communicatie blijkt er interesse van hun kant om in real time video analyse van deze bronnen te bekijken.
+Na een eerste communicatie blijkt er interesse van hun kant om in real time video analyse van deze bronnen te bekijken, voornamelijk om bende vorming te detecteren.
 %---------- Stand van zaken ---------------------------------------------------
 
 \section{State-of-the-art}%
@@ -26,9 +26,6 @@ ga ik zoveel mogelijk proberen gebruik maken van bestaande producten. Eenvoud is
 
 Na een kort onderzoek leek het mij duidelijk om AutoML modellen te gebruiken van Google Vertex AI. Dit zijn AI modellen volledig gemanaged door Google.
 Het kan eventueel interessant zijn om de resultaten te vergelijken met een custom model.
-
-Het streamen van video feeds naar een cloud instantie zal waarschijnlijk de crux van het project vormen. Het is mij nog niet duidelijk welke manieren er bestaan om video met een voldoende kleine vertraging over het internet te streamen.
-Compressie en chunking (netwerking) zullen hierbij onder de loep moeten genomen worden.
 
 Het trainen en uiteindelijk functioneren van een CNN hangt in grote mate af van de kwaliteit van de dataset. Hier verwacht ik problemen om voldoene kwaliteitsvolle data te verzamelen en labellen.
 Gevoelige data (tijdelijk) opslaan op de Cloud blijft een even gevoelig onderwerp.
