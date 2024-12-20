@@ -23,44 +23,74 @@ De supermarktketen is daarom op zoek naar een innovatieve oplossing.
 
 Kan AI hier een oplossing bieden om prijzen efficiënter te beheren?
 
-\section{State-of-the-art}%
+\section{Stand van zaken}%
 \label{sec:state-of-the-art}
-Een succesvol AI-visionsysteem is afhankelijk van een goed samengestelde en geannoteerde dataset, een passende modelarchitectuur,
-en optimale trainingstechnieken zoals fine-tuning en datavermeerdering~\autocite{Goodfellow-et-al-2016}!. Voor real-time toepassingen is efficiëntie van het model en hardware cruciaal.
-Daarnaast vereist een robuust systeem continue evaluatie en verbetering om de prestaties in realistische scenario te waarborgen~\autocite{DBLP:journals/corr/abs-1905-05055}!.
+Er is een duidelijke toename in de ontwikkeling en implementatie van technologieën en initiatieven die gericht zijn op het verminderen van voedselverspilling binnen de retailsector.
+Voorbeelden hiervan zijn de applicatie Too Good To Go, voedselbanken en kortingen op producten die dicht bij de houdbaarheidsdatum liggen.
+Hoewel deze strategieën bijdragen aan het verminderen van verspilling, zijn ze financieel gezien minder aantrekkelijk voor retailers,
+aangezien producten vaak gratis of tegen sterk gereduceerde prijzen worden aangeboden.
 
-
-YOLO heeft aanzienlijke evoluties doorgemaakt, van het oorspronkelijke model tot versies zoals YOLOv4 en de recentere YOLOv5 en YOLOv7.
-Deze nieuwe iteraties bevatten verbeteringen op het gebied van netwerkarchitectuur, zoals Cross-Stage Partial connections (CSP) in YOLOv4,
-die de complexiteit verminderen zonder de nauwkeurigheid te verliezen~\autocite{DBLP:journals/corr/abs-2004-10934}.
-De nieuwste versie, YOLOv7, introduceert technieken zoals Extended Efficient Layer Aggregation Networks (E-ELAN) en modelcompressie,
-wat zorgt voor snellere inference en hogere nauwkeurigheid~\autocite{wang2022yolov7trainablebagoffreebiessets}.
+Volgens\textcite{sarma2023} (2023) kan voedselverspilling leiden tot een verlies van maximaal 4 procent van de totale omzet.
+Het gebruik van dynamische prijszetting, een methode die reeds veelvuldig wordt toegepast in online winkels, biedt een potentiële oplossing om deze verliezen te beperken en de efficiëntie in de verkoop van bijna-vervallen producten te verbeteren.
 %---------- Methodologie ------------------------------------------------------
 
 
 \section{Methodologie}%
 \label{sec:methodologie}
-
-Eerst definiëren we specifieke kenmerken van groepsvorming die we willen identificeren en verzamelen een representatieve dataset.
-Personen zijn gemakkelijk te herkennen.
-Een bepaalde concentratie aan personen kan gezien worden als bendevorming.
-Daarna labelen we de data grondig voor herkenning van personen en gedragingen die op bendevorming kunnen wijzen.
-Vervolgens trainen we een aangepaste YOLO-architectuur met geoptimaliseerde hyperparameters voor nauwkeurige detectie in real-time omgevingen.
-Na training implementeren we post-processing technieken voor het volgen van objecten over frames heen en valideren het model op real-world scenario's.
-Ten slotte integreren we het model in een bewakingssysteem met waarschuwingsfuncties en itereren we op basis van performance feedback voor optimale nauwkeurigheid.
+Het proces begint met het selecteren van een of meerdere supermarktketens die bereid zijn deel te nemen aan het onderzoek.
+De supermarkten moeten beschikken over gedetailleerde gegevens over verkoop, voorraadniveaus, houdbaarheidsdatums en prijsstrategieën,
+evenals bereidheid om deze gegevens te delen.
 
 
+Vervolgens worden historische gegevens verzameld,
+waaronder verkoopcijfers van verse producten zoals vlees, groenten, fruit en zuivel,
+evenals informatie over de voorraadniveaus van deze producten.
+Ook worden de houdbaarheidsdatums van producten verzameld om te bepalen wanneer het risico op verspilling het grootst is.
+Daarnaast worden gegevens over prijsverlagingen, promoties en seizoensgebonden factoren zoals het weer of speciale evenementen verzameld,
+aangezien deze van invloed kunnen zijn op de vraag.
+Dit moet blijken uit een analyse van de historische data.
+
+
+Na de gegevensverzameling volgt een grondige data-analyse.
+Dit begint met het schoonmaken van de gegevens, waarbij onvolledige of inconsistente informatie wordt gecorrigeerd.
+Vervolgens wordt exploratieve data-analyse (EDA) uitgevoerd om patronen en correlaties in de gegevens te identificeren,
+zoals welke producten vaak verspild worden en welke factoren de vraag naar deze producten beïnvloeden.
+De producten worden gecategoriseerd op basis van houdbaarheid en type, wat helpt bij het ontwikkelen van verschillende voorspellingsmodellen voor verschillende productgroepen.
+
+Op basis van deze gegevens wordt een machine learning-model ontwikkeld om de vraag op elk moment naar elk product te voorspellen.
+Hiervoor worden technieken zoals tijdreeksanalyse, Random Forests, XGBoost of Long Short-Term Memory (LSTM)-netwerken gebruikt.
+Deze modellen gebruiken historische verkoopdata, voorraadniveaus, prijsstrategieën en externe factoren om nauwkeurige vraagvoorspellingen te doen.
+Tegelijkertijd wordt een dynamisch prijsoptimalisatie systeem ontwikkeld, dat gebruik maakt van reinforcement learning of optimalisatietechnieken zoals lineaire programmering (hier zou een eenvoudig vraag-aanbod prijzettingsalgoritme volstaan).
+Dit systeem past de prijs van producten aan op basis van de voorspelde vraag en de houdbaarheidsdatums,
+zodat producten die waarschijnlijk niet verkocht zullen worden, tegen een lagere prijs kunnen worden aangeboden om verspilling te verminderen zonder de winstgevendheid te schaden.
+
+Het AI-systeem wordt getest in een simulatieomgeving,
+waarbij historische gegevens worden gebruikt om de prestaties van het systeem te evalueren.
+Idealiter, maar waarschijnlijk niet realistisch wordt het systeem in een pilotproject geïmplementeerd in een geselecteerde supermarktlocatie.
+De effectiviteit van het systeem wordt gemeten aan de hand van belangrijke prestatie-indicatoren (KPI's) zoals de vermindering van voedselverspilling,
+de verbeterde verkoop van bijna-vervalproducten en de financiële impact van prijsoptimalisatie.
+
+Na de test worden de resultaten geanalyseerd en vergeleken met de situatie voor de implementatie van het AI-systeem.
+Op basis van de bevindingen wordt het model verder verfijnd en geoptimaliseerd.
 %---------- Verwachte resultaten ----------------------------------------------
 
 
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
-De accuraatheid van het model wordt gemeten op een goed gevarieerde dataset.
-Ik verwacht een hoge precisie aangezien dit een trigger voor een bepaald persoon zal zijn om een beeld te bekijken moeten vals positieven geminimaliseerd worden.
+De verwachte resultaten van dit onderzoek omvatten in eerste instantie een betere prijs zetting,
+met name bij verse producten, door verbeterde vraagvoorspellingen en dynamische prijsoptimalisatie.
+Het AI-systeem zal de vraag naar producten beter voorspellen,
+wat resulteert in efficiënter voorraadbeheer en het afstemmen van de prijs op de werkelijke vraag.
+Producten die anders verspild zouden worden, kunnen tegen een verlaagde prijs worden verkocht,
+wat zowel verspilling vermindert als de omzet verhoogt.
 
+Zonder een pilotproject is het moeilijk om de effectieve kostenbesparing te meten.
+Voor dit onderzoek volstaat het aantonen van een dynamische prijs zetting gebaseerd op de voorspelling van de huidige vraag doorheen de dag.
+Deze vraag (aantal klanten) wordt voorspeld op basis van real time data met behulp van een intelligent algoritme (getraind op historische data).
+Ook de accuraatheid van dit algoritme zal moeilijk in te schatten zijn zonder een effectieve implementatie.
+Voor deze bachelorproef volstaat het om een realistisch (intuïtief) klantenbezetting voorspelling te zien doorheen een jaar/maand/week/dag.
 
 \section{Verwachte conclusies}
 \label{sec:verwachte_conclusies}
-In een ideaal scenario kan zo een model ingezet worden om bepaalde beelden uit te filteren die ineterssanter zijn om te bekijken.
-Dit vermindert het werk van de opzichter, die nu alle beelden moet verwerken.
-Het kan ook zorgen voor snellere detectie van bepaalde omstandigheden waar sneller op gereageerd kan worden.
+
+Dit algoritme is sterk afhankelijk van de nauwkeurigheid van de vraagvoorspelling op elk specifiek moment van de dag. De precisie van het model neemt toe naarmate er meer relevante gegevens beschikbaar zijn. In het geval van implementatie in een supermarkt met digitale prijskaarten, zal het model paradoxaal genoeg ook een invloed uitoefenen op de vraag zelf. De gegenereerde data uit deze dynamiek zal vervolgens noodzakelijk zijn voor de verdere optimalisatie van het model.
