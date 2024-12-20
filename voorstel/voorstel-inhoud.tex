@@ -2,36 +2,65 @@
 
 \section{Introductie}%
 \label{sec:introductie}
+In Vlaanderen wordt jaarlijks ongeveer 884 miljoen ton voedsel voor menselijke consumptie verspild, waarvan een significant deel afkomstig is uit de retailsector~\autocite{OVAM}.
+Supermarkten dragen hieraan bij door onverkochte verse producten, zoals groenten, fruit, vlees, en zuivel,
+weg te gooien vanwege verlopen houdbaarheidsdata of onvoldoende vraag. Dit heeft niet alleen financiële gevolgen,
+maar ook ecologische impact, zoals onnodige CO₂-uitstoot en verspilling van natuurlijke hulpbronnen.
 
-Belgie telt zo een 50.000 bewakingscamera's volgens de privacy comissie (geen echte bron, ruwe schatting), maar zij beweren dat dit een understatement van 50% is.
-Een groot deel daarvan zijn eigendom van de politie. Deze worden voornamelijk gebruikt om na de feiten specifieke timeframes te onderzoeken.
-Na een eerste communicatie blijkt er interesse van hun kant om in real time video analyse van deze bronnen te bekijken, voornamelijk om bende vorming te detecteren.
-%---------- Stand van zaken ---------------------------------------------------
+Een regionale supermarktketen, zoals Carrefour of Delhaize, probeert voedselverspilling te beperken door manuele kortingen toe te passen op producten die bijna over de vervaldatum zijn.
+Hoewel deze aanpak enige verbetering oplevert, blijft een groot deel van de producten ongekocht.
+Dit probleem wordt verergerd door een gebrek aan inzicht in vraagvoorspellingen en een inefficiënt voorraadbeheersysteem.
+Kan dit systeem geoptimaliseerd worden met behulp van real-time data in plaats van historische verkoopcijfers?
+
+Daarnaast is het koopgedrag van klanten moeilijk voorspelbaar, beïnvloed door externe factoren zoals seizoensgebonden vraag,
+weersomstandigheden, en promoties.
+Moet hier rekening mee gehouden worden?
+En is deze data nuttig in een dynamisch prijszettingsalgoritme?
+Volgens de essentie van vraag en aanbod, kan op elk moment de prijs gezet worden aan de hand van de verwachte vraag van die dag.
+Zonder een dynamisch en voorspellend systeem blijft de keten reactief handelen,
+wat leidt tot een blijvend hoge verspilling.
+De supermarktketen is daarom op zoek naar een innovatieve oplossing.
+
+Kan AI hier een oplossing bieden om prijzen efficiënter te beheren?
 
 \section{State-of-the-art}%
 \label{sec:state-of-the-art}
+Een succesvol AI-visionsysteem is afhankelijk van een goed samengestelde en geannoteerde dataset, een passende modelarchitectuur,
+en optimale trainingstechnieken zoals fine-tuning en datavermeerdering~\autocite{Goodfellow-et-al-2016}!. Voor real-time toepassingen is efficiëntie van het model en hardware cruciaal.
+Daarnaast vereist een robuust systeem continue evaluatie en verbetering om de prestaties in realistische scenario te waarborgen~\autocite{DBLP:journals/corr/abs-1905-05055}!.
 
-Video analyse in AI termen betekent dat een CNN afbeelding per afbeelding bekijkt alsook de semantische verschillen tussen opeenvolgende frames.
-Aangezien video voornamelijk in 24 of 25 fps wordt opgenomen betekent dat foto's heel snel behandeld moeten worden. En dit is slechts voor één camera.
-Ongelimiteerde rekenkracht en schaalbaarheid zijn hier dus de belangrijkste factoren. Daarom koos ik voor een oplossing in een cloud instantie.
 
-Natuurlijk zijn er GDPR afwegingen en is er (veelal onterecht) algemeen wantrouwen in cloud computing. Maar deze laat ik hier ter zijde.
-
+YOLO heeft aanzienlijke evoluties doorgemaakt, van het oorspronkelijke model tot versies zoals YOLOv4 en de recentere YOLOv5 en YOLOv7.
+Deze nieuwe iteraties bevatten verbeteringen op het gebied van netwerkarchitectuur, zoals Cross-Stage Partial connections (CSP) in YOLOv4,
+die de complexiteit verminderen zonder de nauwkeurigheid te verliezen~\autocite{DBLP:journals/corr/abs-2004-10934}.
+De nieuwste versie, YOLOv7, introduceert technieken zoals Extended Efficient Layer Aggregation Networks (E-ELAN) en modelcompressie,
+wat zorgt voor snellere inference en hogere nauwkeurigheid~\autocite{wang2022yolov7trainablebagoffreebiessets}.
 %---------- Methodologie ------------------------------------------------------
+
+
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Het doel is om een professioneel werkend resultaat met voldoende performantie en schaalbaarheid te bekomen. Aangezien mijn GCP en (professioneel) data engineering kennis beperkt is,
-ga ik zoveel mogelijk proberen gebruik maken van bestaande producten. Eenvoud is samen met performantie en schaalbaarheid de belangrijkste NFR.
+Eerst definiëren we specifieke kenmerken van groepsvorming die we willen identificeren en verzamelen een representatieve dataset.
+Personen zijn gemakkelijk te herkennen.
+Een bepaalde concentratie aan personen kan gezien worden als bendevorming.
+Daarna labelen we de data grondig voor herkenning van personen en gedragingen die op bendevorming kunnen wijzen.
+Vervolgens trainen we een aangepaste YOLO-architectuur met geoptimaliseerde hyperparameters voor nauwkeurige detectie in real-time omgevingen.
+Na training implementeren we post-processing technieken voor het volgen van objecten over frames heen en valideren het model op real-world scenario's.
+Ten slotte integreren we het model in een bewakingssysteem met waarschuwingsfuncties en itereren we op basis van performance feedback voor optimale nauwkeurigheid.
 
-Na een kort onderzoek leek het mij duidelijk om AutoML modellen te gebruiken van Google Vertex AI. Dit zijn AI modellen volledig gemanaged door Google.
-Het kan eventueel interessant zijn om de resultaten te vergelijken met een custom model.
 
-Het trainen en uiteindelijk functioneren van een CNN hangt in grote mate af van de kwaliteit van de dataset. Hier verwacht ik problemen om voldoene kwaliteitsvolle data te verzamelen en labellen.
-Gevoelige data (tijdelijk) opslaan op de Cloud blijft een even gevoelig onderwerp.
 %---------- Verwachte resultaten ----------------------------------------------
+
+
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
+De accuraatheid van het model wordt gemeten op een goed gevarieerde dataset.
+Ik verwacht een hoge precisie aangezien dit een trigger voor een bepaald persoon zal zijn om een beeld te bekijken moeten vals positieven geminimaliseerd worden.
 
-Ik kan het project slechts geslaagd noemen als er een accuraatheid van 97% behaald wordt. Ook moet er binnen een redelijk timeframe een predictie geretourneerd worden.
-Deze 2 factoren zullen het uiteindelijke succes van het product bepalen.
+
+\section{Verwachte conclusies}
+\label{sec:verwachte_conclusies}
+In een ideaal scenario kan zo een model ingezet worden om bepaalde beelden uit te filteren die ineterssanter zijn om te bekijken.
+Dit vermindert het werk van de opzichter, die nu alle beelden moet verwerken.
+Het kan ook zorgen voor snellere detectie van bepaalde omstandigheden waar sneller op gereageerd kan worden.
