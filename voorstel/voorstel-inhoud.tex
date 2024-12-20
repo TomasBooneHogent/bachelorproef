@@ -3,24 +3,23 @@
 \section{Introductie}%
 \label{sec:introductie}
 In Vlaanderen wordt jaarlijks ongeveer 884 miljoen ton voedsel voor menselijke consumptie verspild, waarvan een significant deel afkomstig is uit de retailsector~\autocite{OVAM}.
-Supermarkten dragen hieraan bij door onverkochte verse producten, zoals groenten, fruit, vlees, en zuivel,
-weg te gooien vanwege verlopen houdbaarheidsdata of onvoldoende vraag. Dit heeft niet alleen financiële gevolgen,
-maar ook ecologische impact, zoals onnodige CO₂-uitstoot en verspilling van natuurlijke hulpbronnen.
-
+Supermarkten dragen hieraan bij door onverkochte verse producten, zoals groenten, fruit, vlees, en zuivel weg te gooien vanwege verlopen houdbaarheidsdata.
+Dit heeft niet alleen financiële gevolgen, maar ook een ecologische impact, zoals onnodige CO₂-uitstoot en verspilling van natuurlijke hulpbronnen.
+\\
 Een regionale supermarktketen, zoals Carrefour of Delhaize, probeert voedselverspilling te beperken door manuele kortingen toe te passen op producten die bijna over de vervaldatum zijn.
-Hoewel deze aanpak enige verbetering oplevert, blijft een groot deel van de producten ongekocht.
+Hoewel deze aanpak enige verbetering oplevert, blijft een groot deel van de producten niet verkocht.
 Dit probleem wordt verergerd door een gebrek aan inzicht in vraagvoorspellingen en een inefficiënt voorraadbeheersysteem.
-Kan dit systeem geoptimaliseerd worden met behulp van real-time data in plaats van historische verkoopcijfers?
-
-Daarnaast is het koopgedrag van klanten moeilijk voorspelbaar, beïnvloed door externe factoren zoals seizoensgebonden vraag,
-weersomstandigheden, en promoties.
+Kan dit systeem geoptimaliseerd worden met behulp van real-time data in plaats van historische verkoopcijfers of intuïtieve beslissingen?
+\\
+Het koopgedrag van klanten moeilijk voorspelbaar en wordt beïnvloed door externe factoren zoals seizoensgebonden vraag en
+weersomstandigheden.
 Moet hier rekening mee gehouden worden?
-En is deze data nuttig in een dynamisch prijszettingsalgoritme?
-Volgens de essentie van vraag en aanbod, kan op elk moment de prijs gezet worden aan de hand van de verwachte vraag van die dag.
+En is deze data nuttig in een dynamisch prijszetting algoritme?
+Volgens de essentie van vraag en aanbod, kan op elk moment de prijs gezet worden aan de hand van de verwachte vraag van de dag of moment.
 Zonder een dynamisch en voorspellend systeem blijft de keten reactief handelen,
-wat leidt tot een blijvend hoge verspilling.
+wat leidt tot een groter financieel verlies.
 De supermarktketen is daarom op zoek naar een innovatieve oplossing.
-
+\\
 Kan AI hier een oplossing bieden om prijzen efficiënter te beheren?
 
 \section{Stand van zaken}%
@@ -29,9 +28,10 @@ Er is een duidelijke toename in de ontwikkeling en implementatie van technologie
 Voorbeelden hiervan zijn de applicatie Too Good To Go, voedselbanken en kortingen op producten die dicht bij de houdbaarheidsdatum liggen.
 Hoewel deze strategieën bijdragen aan het verminderen van verspilling, zijn ze financieel gezien minder aantrekkelijk voor retailers,
 aangezien producten vaak gratis of tegen sterk gereduceerde prijzen worden aangeboden.
-
-Volgens\textcite{sarma2023} (2023) kan voedselverspilling leiden tot een verlies van maximaal 4 procent van de totale omzet.
-Het gebruik van dynamische prijszetting, een methode die reeds veelvuldig wordt toegepast in online winkels, biedt een potentiële oplossing om deze verliezen te beperken en de efficiëntie in de verkoop van bijna-vervallen producten te verbeteren.
+\\
+Volgens\textcite{sarma2023} kan voedselverspilling leiden tot een verlies van maximaal 4 procent van de totale omzet.
+Het gebruik van dynamische prijszetting, een methode die reeds veelvuldig wordt toegepast in online winkels,
+biedt een potentiële oplossing om deze verliezen te beperken en de efficiëntie in de verkoop van bijna-vervallen producten te verbeteren.
 %---------- Methodologie ------------------------------------------------------
 
 
@@ -40,8 +40,7 @@ Het gebruik van dynamische prijszetting, een methode die reeds veelvuldig wordt 
 Het proces begint met het selecteren van een of meerdere supermarktketens die bereid zijn deel te nemen aan het onderzoek.
 De supermarkten moeten beschikken over gedetailleerde gegevens over verkoop, voorraadniveaus, houdbaarheidsdatums en prijsstrategieën,
 evenals bereidheid om deze gegevens te delen.
-
-
+\\
 Vervolgens worden historische gegevens verzameld,
 waaronder verkoopcijfers van verse producten zoals vlees, groenten, fruit en zuivel,
 evenals informatie over de voorraadniveaus van deze producten.
@@ -49,27 +48,26 @@ Ook worden de houdbaarheidsdatums van producten verzameld om te bepalen wanneer 
 Daarnaast worden gegevens over prijsverlagingen, promoties en seizoensgebonden factoren zoals het weer of speciale evenementen verzameld,
 aangezien deze van invloed kunnen zijn op de vraag.
 Dit moet blijken uit een analyse van de historische data.
-
-
+\\
 Na de gegevensverzameling volgt een grondige data-analyse.
 Dit begint met het schoonmaken van de gegevens, waarbij onvolledige of inconsistente informatie wordt gecorrigeerd.
 Vervolgens wordt exploratieve data-analyse (EDA) uitgevoerd om patronen en correlaties in de gegevens te identificeren,
 zoals welke producten vaak verspild worden en welke factoren de vraag naar deze producten beïnvloeden.
 De producten worden gecategoriseerd op basis van houdbaarheid en type, wat helpt bij het ontwikkelen van verschillende voorspellingsmodellen voor verschillende productgroepen.
-
+\\
 Op basis van deze gegevens wordt een machine learning-model ontwikkeld om de vraag op elk moment naar elk product te voorspellen.
 Hiervoor worden technieken zoals tijdreeksanalyse, Random Forests, XGBoost of Long Short-Term Memory (LSTM)-netwerken gebruikt.
-Deze modellen gebruiken historische verkoopdata, voorraadniveaus, prijsstrategieën en externe factoren om nauwkeurige vraagvoorspellingen te doen.
+Deze modellen gebruiken historische verkoopdata en externe factoren om nauwkeurige vraagvoorspellingen te doen.
 Tegelijkertijd wordt een dynamisch prijsoptimalisatie systeem ontwikkeld, dat gebruik maakt van reinforcement learning of optimalisatietechnieken zoals lineaire programmering (hier zou een eenvoudig vraag-aanbod prijzettingsalgoritme volstaan).
-Dit systeem past de prijs van producten aan op basis van de voorspelde vraag en de houdbaarheidsdatums,
+Dit systeem past de prijs van producten aan op basis van de voorspelde vraag, aanbod en de houdbaarheidsdatums,
 zodat producten die waarschijnlijk niet verkocht zullen worden, tegen een lagere prijs kunnen worden aangeboden om verspilling te verminderen zonder de winstgevendheid te schaden.
-
-Het AI-systeem wordt getest in een simulatieomgeving,
+\\
+Het voorspellend algoritme wordt getest in een simulatieomgeving,
 waarbij historische gegevens worden gebruikt om de prestaties van het systeem te evalueren.
 Idealiter, maar waarschijnlijk niet realistisch wordt het systeem in een pilotproject geïmplementeerd in een geselecteerde supermarktlocatie.
 De effectiviteit van het systeem wordt gemeten aan de hand van belangrijke prestatie-indicatoren (KPI's) zoals de vermindering van voedselverspilling,
 de verbeterde verkoop van bijna-vervalproducten en de financiële impact van prijsoptimalisatie.
-
+\\
 Na de test worden de resultaten geanalyseerd en vergeleken met de situatie voor de implementatie van het AI-systeem.
 Op basis van de bevindingen wordt het model verder verfijnd en geoptimaliseerd.
 %---------- Verwachte resultaten ----------------------------------------------
@@ -77,13 +75,9 @@ Op basis van de bevindingen wordt het model verder verfijnd en geoptimaliseerd.
 
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
-De verwachte resultaten van dit onderzoek omvatten in eerste instantie een betere prijs zetting,
+De verwachte resultaten van dit onderzoek omvatten in eerste instantie een betere prijs zetting, gebaseerd op de werkelijke vraag,
 met name bij verse producten, door verbeterde vraagvoorspellingen en dynamische prijsoptimalisatie.
-Het AI-systeem zal de vraag naar producten beter voorspellen,
-wat resulteert in efficiënter voorraadbeheer en het afstemmen van de prijs op de werkelijke vraag.
-Producten die anders verspild zouden worden, kunnen tegen een verlaagde prijs worden verkocht,
-wat zowel verspilling vermindert als de omzet verhoogt.
-
+\\
 Zonder een pilotproject is het moeilijk om de effectieve kostenbesparing te meten.
 Voor dit onderzoek volstaat het aantonen van een dynamische prijs zetting gebaseerd op de voorspelling van de huidige vraag doorheen de dag.
 Deze vraag (aantal klanten) wordt voorspeld op basis van real time data met behulp van een intelligent algoritme (getraind op historische data).
@@ -93,4 +87,7 @@ Voor deze bachelorproef volstaat het om een realistisch (intuïtief) klantenbeze
 \section{Verwachte conclusies}
 \label{sec:verwachte_conclusies}
 
-Dit algoritme is sterk afhankelijk van de nauwkeurigheid van de vraagvoorspelling op elk specifiek moment van de dag. De precisie van het model neemt toe naarmate er meer relevante gegevens beschikbaar zijn. In het geval van implementatie in een supermarkt met digitale prijskaarten, zal het model paradoxaal genoeg ook een invloed uitoefenen op de vraag zelf. De gegenereerde data uit deze dynamiek zal vervolgens noodzakelijk zijn voor de verdere optimalisatie van het model.
+Dit algoritme is sterk afhankelijk van de nauwkeurigheid van de vraagvoorspelling op elk specifiek moment van de dag.
+De precisie van het model neemt toe naarmate er meer relevante gegevens beschikbaar zijn.
+In het geval van implementatie in een supermarkt met digitale prijskaarten, zal het model paradoxaal genoeg ook een invloed uitoefenen op de vraag zelf.
+De gegenereerde data uit deze dynamiek zal vervolgens noodzakelijk zijn voor de verdere optimalisatie van het model.
