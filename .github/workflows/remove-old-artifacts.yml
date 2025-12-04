@@ -23,7 +23,7 @@ jobs:
         # How long should an artifact be kept?
         # '<number> <unit>', e.g. 5 days, 2 years, 90 seconds,
         # parsed by Moment.js
-        age: '2 days'
+        age: '100 days'
         
         # Tagged artifacts (releases) are always kept
         skip-tags: true
