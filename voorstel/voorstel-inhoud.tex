@@ -9,7 +9,7 @@ Dit onderzoek kan interessant zijn voor financiële risicoanalisten en beleidsma
 De huidige methoden voor risicoanalyse maken onvoldoende gebruik van de enorme hoeveelheid beschikbare historische data, waardoor sector-brede trends en vroegtijdige waarschuwingssignalen voor falingen over het hoofd worden gezien.
 
 Dit leidt tot de centrale onderzoeksvraag:
-\textit{In welke mate kan een Big Data-architectuur op basis van publieke NBB-data bijdragen tot een nauwkeurigere financiële risico-inschatting en voorspelling van solvabiliteit bij kredietverlening?}
+\textit{In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting en voorspelling van solvabiliteit bij kredietverlening?}
 
 De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database (Google BigQuery). Hiermee wordt dan gëxperimenteerd en getest indien sector-brede benchmarking en voorspellende analyses een meerwaarde kunnen bieden bovenop de klassieke dossierbehandeling.
 
@@ -21,7 +21,7 @@ De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waar
 
 De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aan de hand van ratio-analyse (zoals liquiditeit, solvabiliteit en rentabiliteit) op basis van de jaarrekening~\autocite{Ooghe2020}. Er bestaan diverse modellen, zoals de Altman Z-score, die op basis van deze ratio's de kans op faillissement trachten te voorspellen.
 
-Echter, met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur toont aan dat het gebruik van cloud-native datawarehouses, zoals Google BigQuery, het mogelijk maakt om datasets van miljoenen rijen in seconden te verwerken~\autocite{Tigani2014}. Hierdoor wordt het mogelijk om niet enkel naar één bedrijf te kijken, maar de prestaties direct af te zetten tegenover *real-time* berekende sectorgemiddelden.
+Echter, met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur toont aan dat het gebruik van cloud-native datawarehouses, zoals Google BigQuery, het mogelijk maakt om datasets van miljoenen rijen in seconden te verwerken~\autocite{Tigani2014}. Hierdoor wordt het mogelijk om niet enkel naar één bedrijf te kijken, maar de prestaties direct af te zetten tegenover "real-time" berekende sectorgemiddelden.
 
 Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Uitgebreide benchmarks van classificatie-algoritmen tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden~\autocite{Lessmann2015}. Het toepassen van deze algoritmen op de specifieke structuur van de Belgische NBB-dataset is een veelbelovende piste die in dit onderzoek verder verkend zal worden.
 
@@ -35,9 +35,9 @@ Het onderzoek zal verlopen in vier fasen:
 
 \begin{enumerate}
     \item \textbf{Data Ingestie \& Engineering:} De data van de Nationale Bank van België wordt verkregen via hun Open Data portaal. Er wordt een ETL-pipeline (Extract, Transform, Load) opgezet om deze data, betreffende alle Belgische ondernemingen over de laatste drie boekjaren, op te schonen en in te laden in Google BigQuery.
-    \item \textbf{Beschrijvende Analyse:} Via SQL-queries worden sectorgemiddelden berekend op basis van NACE-codes. Er wordt gekeken naar spreiding en clustering van ondernemingen om 'gezonde' versus 'ongezonde' profielen te definiëren.
-    \item \textbf{Voorspellende Analyse:} Er wordt een experiment opgezet met een Machine Learning model (bijvoorbeeld via BigQuery ML of Python/scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ de resultaten van jaar $X$ te voorspellen. De accuraatheid van dit model wordt getoetst.
-    \item \textbf{Evaluatie:} De resultaten worden gevisualiseerd in een dashboard (bv. Looker Studio) om de bruikbaarheid voor een risicoanalist te evalueren. Kan de tool sneller een correct risicoprofiel schetsen dan een manuele analyse?
+    \item \textbf{Beschrijvende Analyse:} Op basis van NACE-codes worden ondernemingen geclassificeerd in financieel gelijkaardige groepen. Bedrijven binnen een groep moeten een gelijkaardige grootte en mark hebben.
+    \item \textbf{Voorspellende Analyse:} Er wordt een experiment opgezet met een Machine Learning model (bijvoorbeeld via Python/scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ de resultaten van jaar $X$ te voorspellen. De accuraatheid van dit model wordt getoetst.
+    \item \textbf{Evaluatie:} De resultaten worden gevisualiseerd in een dashboard (bv. Tableau) om de bruikbaarheid voor een risicoanalist te evalueren. Kan de tool sneller een correct risicoprofiel schetsen dan een manuele analyse?
 \end{enumerate}
 
 De benodigde tools zijn Google Cloud Platform (Storage, BigQuery), Python (voor data manipulatie) en visualisatiesoftware.
@@ -45,9 +45,9 @@ De benodigde tools zijn Google Cloud Platform (Storage, BigQuery), Python (voor 
 Tijdschatting:
 \begin{itemize}
     \item Maand 1: Literatuurstudie en data-acquisitie NBB.
-    \item Maand 2: Opzet BigQuery en ETL-pipeline.
-    \item Maand 3: Data-analyse en ontwikkeling voorspellend model.
-    \item Maand 4: Rapportage, visualisatie en conclusie.
+    \item Maand 2-3: Opzet BigQuery en ETL-pipeline.
+    \item Maand 4-5: Data-analyse en ontwikkeling voorspellend model.
+    \item Maand 6: Rapportage, visualisatie en conclusie.
 \end{itemize}
 
 %---------- Verwachte resultaten ----------------------------------------------
