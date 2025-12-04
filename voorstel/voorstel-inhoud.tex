@@ -18,62 +18,65 @@
 
 Bij het toekennen van zakelijke leningen moeten banken en kredietverstrekkers een nauwkeurige inschatting maken van het risico op wanbetaling. Momenteel baseren analisten zich voornamelijk op de meest recente jaarrekening van de specifieke onderneming, aangevuld met externe credit scores. Deze aanpak is echter reactief en isoleert het bedrijf vaak van zijn bredere sectorale context. Bovendien is het manueel vergelijken van een onderneming met al haar sectorgenoten een onbegonnen werk zonder de juiste technologische ondersteuning.
 
-De doelgroep van dit onderzoek zijn financiële risicoanalisten en beleidsmakers binnen banken die verantwoordelijk zijn voor het bepalen van leningsvoorwaarden (zoals rentevoeten en looptijden).
+Dit onderzoek kan interessant zijn voor financiële risicoanalisten en beleidsmakers binnen banken die verantwoordelijk zijn voor het bepalen van leningsvoorwaarden (zoals rentevoeten en looptijden).
 
-De probleemstelling luidt als volgt: de huidige methoden voor risicoanalyse maken onvoldoende gebruik van de enorme hoeveelheid beschikbare historische data, waardoor sector-brede trends en vroegtijdige waarschuwingssignalen voor falingen over het hoofd worden gezien.
+De huidige methoden voor risicoanalyse maken onvoldoende gebruik van de enorme hoeveelheid beschikbare historische data, waardoor sector-brede trends en vroegtijdige waarschuwingssignalen voor falingen over het hoofd worden gezien.
 
 Dit leidt tot de centrale onderzoeksvraag:
 \textit{In welke mate kan een Big Data-architectuur op basis van publieke NBB-data bijdragen tot een nauwkeurigere financiële risico-inschatting en voorspelling van solvabiliteit bij kredietverlening?}
 
-De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database (Google BigQuery). Hiermee wordt aangetoond dat geautomatiseerde benchmarking en voorspellende analyses een meerwaarde bieden bovenop de klassieke dossierbehandeling.
+De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database (Google BigQuery). Hiermee wordt dan gëxperimenteerd en getest indien sector-brede benchmarking en voorspellende analyses een meerwaarde kunnen bieden bovenop de klassieke dossierbehandeling.
 
 %---------- Stand van zaken ---------------------------------------------------
 
 \section{Literatuurstudie}%
 \label{sec:literatuurstudie}
 
-Hier beschrijf je de \emph{state-of-the-art} rondom je gekozen onderzoeksdomein, d.w.z.\ een inleidende, doorlopende tekst over het onderzoeksdomein van je bachelorproef. Je steunt daarbij heel sterk op de professionele \emph{vakliteratuur}, en niet zozeer op populariserende teksten voor een breed publiek. Wat is de huidige stand van zaken in dit domein, en wat zijn nog eventuele open vragen (die misschien de aanleiding waren tot je onderzoeksvraag!)?
+H
+De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aan de hand van ratio-analyse (zoals liquiditeit, solvabiliteit en rentabiliteit) op basis van de jaarrekening~\autocite{Ooghe2020}. Er bestaan diverse modellen, zoals de Altman Z-score, die op basis van deze ratio's de kans op faillissement trachten te voorspellen.
 
-Je mag de titel van deze sectie ook aanpassen (literatuurstudie, stand van zaken, enz.). Zijn er al gelijkaardige onderzoeken gevoerd? Wat concluderen ze? Wat is het verschil met jouw onderzoek?
+Echter, met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur toont aan dat het gebruik van cloud-native datawarehouses, zoals Google BigQuery of Amazon Redshift, het mogelijk maakt om datasets van miljoenen rijen in seconden te verwerken~\autocite{Tigani2014}. Hierdoor wordt het mogelijk om niet enkel naar één bedrijf te kijken, maar de prestaties direct af te zetten tegenover *real-time* berekende sectorgemiddelden.
 
-Verwijs bij elke introductie van een term of bewering over het domein naar de vakliteratuur, bijvoorbeeld~\autocite{Hykes2013}! Denk zeker goed na welke werken je refereert en waarom.
+Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van tijdreeksen (Time Series Forecasting). Het toepassen van dergelijke algoritmen op financiële data (jaarrekeningen over meerdere jaren) kan patronen blootleggen die voor het menselijk oog verborgen blijven. Er is echter nog ruimte voor onderzoek naar de specifieke toepassing hiervan op de Belgische context met de specifieke structuur van de NBB-dataset.
 
-Draag zorg voor correcte literatuurverwijzingen! Een bronvermelding hoort thuis \emph{binnen} de zin waar je je op die bron baseert, dus niet er buiten! Maak meteen een verwijzing als je gebruik maakt van een bron. Doe dit dus \emph{niet} aan het einde van een lange paragraaf. Baseer nooit teveel aansluitende tekst op eenzelfde bron.
 
-Als je informatie over bronnen verzamelt in JabRef, zorg er dan voor dat alle nodige info aanwezig is om de bron terug te vinden (zoals uitvoerig besproken in de lessen Research Methods).
-
-% Voor literatuurverwijzingen zijn er twee belangrijke commando's:
-% \autocite{KEY} => (Auteur, jaartal) Gebruik dit als de naam van de auteur
-%   geen onderdeel is van de zin.
-% \textcite{KEY} => Auteur (jaartal)  Gebruik dit als de auteursnaam wel een
-%   functie heeft in de zin (bv. ``Uit onderzoek door Doll & Hill (1954) bleek
-%   ...'')
-
-Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur van de tekst kan verduidelijken.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+Het onderzoek zal verlopen in vier fasen:
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+\begin{enumerate}
+    \item \textbf{Data Ingestie \& Engineering:} De data van de Nationale Bank van België wordt verkregen via hun Open Data portaal (doorgaans in XML of CSV formaat). Er wordt een ETL-pipeline (Extract, Transform, Load) opgezet om deze data, betreffende alle Belgische ondernemingen over de laatste drie boekjaren, op te schonen en in te laden in Google BigQuery.
+    \item \textbf{Beschrijvende Analyse:} Via SQL-queries worden sectorgemiddelden berekend op basis van NACE-codes. Er wordt gekeken naar spreiding en clustering van ondernemingen om 'gezonde' versus 'ongezonde' profielen te definiëren.
+    \item \textbf{Voorspellende Analyse:} Er wordt een experiment opgezet met een Machine Learning model (bijvoorbeeld via BigQuery ML of Python/scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ de resultaten van jaar $X$ te voorspellen. De accuraatheid van dit model wordt getoetst.
+    \item \textbf{Evaluatie:} De resultaten worden gevisualiseerd in een dashboard (bv. Looker Studio) om de bruikbaarheid voor een risicoanalist te evalueren. Kan de tool sneller een correct risicoprofiel schetsen dan een manuele analyse?
+\end{enumerate}
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+De benodigde tools zijn Google Cloud Platform (Storage, BigQuery), Python (voor data manipulatie) en visualisatiesoftware.
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
-
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+Tijdschatting:
+\begin{itemize}
+    \item Maand 1: Literatuurstudie en data-acquisitie NBB.
+    \item Maand 2: Opzet BigQuery en ETL-pipeline.
+    \item Maand 3: Data-analyse en ontwikkeling voorspellend model.
+    \item Maand 4: Rapportage, visualisatie en conclusie.
+\end{itemize}
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
 
-Hier beschrijf je welke resultaten je verwacht. Als je metingen en simulaties uitvoert, kan je hier al mock-ups maken van de grafieken samen met de verwachte conclusies. Benoem zeker al je assen en de onderdelen van de grafiek die je gaat gebruiken. Dit zorgt ervoor dat je concreet weet welk soort data je moet verzamelen en hoe je die moet meten.
 
-Wat heeft de doelgroep van je onderzoek aan het resultaat? Op welke manier zorgt jouw bachelorproef voor een meerwaarde?
+Het verwachte eindresultaat is een werkende Proof of Concept van een risico-dashboard.
 
-Hier beschrijf je wat je verwacht uit je onderzoek, met de motivatie waarom. Het is \textbf{niet} erg indien uit je onderzoek andere resultaten en conclusies vloeien dan dat je hier beschrijft: het is dan juist interessant om te onderzoeken waarom jouw hypothesen niet overeenkomen met de resultaten.
+Concreet verwacht ik:
+\begin{itemize}
+    \item Een gevulde BigQuery database die performant queries kan uitvoeren op de volledige Belgische bedrijfsdataset.
+    \item Inzicht in sector-specifieke trends: bijvoorbeeld, "Hoe presteert de horeca in West-Vlaanderen ten opzichte van het nationale gemiddelde?".
+    \item Een evaluatie van de haalbaarheid om jaarrekeningen te voorspellen: is de historische data van de NBB voldoende voorspellend voor de toekomst, of zijn er te veel externe factoren?
+\end{itemize}
 
+De meerwaarde voor de banksector is evident: door risico's beter in te schatten, kunnen leningen met meer precisie worden toegekend. Dit betekent lagere rentes voor gezonde bedrijven en bescherming voor de bank tegen 'bad debt' bij risicovolle ondernemingen. Indien het voorspellende model accuraat blijkt, kan dit het acceptatieproces voor leningen deels automatiseren.
