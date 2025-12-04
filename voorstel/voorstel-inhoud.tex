@@ -1,17 +1,3 @@
-%---------- Inleiding ---------------------------------------------------------
-
-% TODO: Is dit voorstel gebaseerd op een paper van Research Methods die je
-% vorig jaar hebt ingediend? Heb je daarbij eventueel samengewerkt met een
-% andere student?
-% Zo ja, haal dan de tekst hieronder uit commentaar en pas aan.
-
-%\paragraph{Opmerking}
-
-% Dit voorstel is gebaseerd op het onderzoeksvoorstel dat werd geschreven in het
-% kader van het vak Research Methods dat ik (vorig/dit) academiejaar heb
-% uitgewerkt (met medesturent VOORNAAM NAAM als mede-auteur).
-% 
-
 \section{Inleiding}%
 \label{sec:inleiding}
 
@@ -35,21 +21,20 @@ De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waar
 
 De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aan de hand van ratio-analyse (zoals liquiditeit, solvabiliteit en rentabiliteit) op basis van de jaarrekening~\autocite{Ooghe2020}. Er bestaan diverse modellen, zoals de Altman Z-score, die op basis van deze ratio's de kans op faillissement trachten te voorspellen.
 
-Echter, met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur toont aan dat het gebruik van cloud-native datawarehouses, zoals Google BigQuery of Amazon Redshift, het mogelijk maakt om datasets van miljoenen rijen in seconden te verwerken~\autocite{Tigani2014}. Hierdoor wordt het mogelijk om niet enkel naar één bedrijf te kijken, maar de prestaties direct af te zetten tegenover *real-time* berekende sectorgemiddelden.
+Echter, met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur toont aan dat het gebruik van cloud-native datawarehouses, zoals Google BigQuery, het mogelijk maakt om datasets van miljoenen rijen in seconden te verwerken~\autocite{Tigani2014}. Hierdoor wordt het mogelijk om niet enkel naar één bedrijf te kijken, maar de prestaties direct af te zetten tegenover *real-time* berekende sectorgemiddelden.
 
-Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van tijdreeksen (Time Series Forecasting). Het toepassen van dergelijke algoritmen op financiële data (jaarrekeningen over meerdere jaren) kan patronen blootleggen die voor het menselijk oog verborgen blijven. Er is echter nog ruimte voor onderzoek naar de specifieke toepassing hiervan op de Belgische context met de specifieke structuur van de NBB-dataset.
-
-
+Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Uitgebreide benchmarks van classificatie-algoritmen tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden~\autocite{Lessmann2015}. Het toepassen van deze algoritmen op de specifieke structuur van de Belgische NBB-dataset is een veelbelovende piste die in dit onderzoek verder verkend zal worden.
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
 
+Dit onderzoek volgt de methodologie van een \emph{constructief onderzoek} (design science), waarbij een artefact (de data-applicatie) wordt gebouwd en geëvalueerd.
 
 Het onderzoek zal verlopen in vier fasen:
 
 \begin{enumerate}
-    \item \textbf{Data Ingestie \& Engineering:} De data van de Nationale Bank van België wordt verkregen via hun Open Data portaal (doorgaans in XML of CSV formaat). Er wordt een ETL-pipeline (Extract, Transform, Load) opgezet om deze data, betreffende alle Belgische ondernemingen over de laatste drie boekjaren, op te schonen en in te laden in Google BigQuery.
+    \item \textbf{Data Ingestie \& Engineering:} De data van de Nationale Bank van België wordt verkregen via hun Open Data portaal. Er wordt een ETL-pipeline (Extract, Transform, Load) opgezet om deze data, betreffende alle Belgische ondernemingen over de laatste drie boekjaren, op te schonen en in te laden in Google BigQuery.
     \item \textbf{Beschrijvende Analyse:} Via SQL-queries worden sectorgemiddelden berekend op basis van NACE-codes. Er wordt gekeken naar spreiding en clustering van ondernemingen om 'gezonde' versus 'ongezonde' profielen te definiëren.
     \item \textbf{Voorspellende Analyse:} Er wordt een experiment opgezet met een Machine Learning model (bijvoorbeeld via BigQuery ML of Python/scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ de resultaten van jaar $X$ te voorspellen. De accuraatheid van dit model wordt getoetst.
     \item \textbf{Evaluatie:} De resultaten worden gevisualiseerd in een dashboard (bv. Looker Studio) om de bruikbaarheid voor een risicoanalist te evalueren. Kan de tool sneller een correct risicoprofiel schetsen dan een manuele analyse?
