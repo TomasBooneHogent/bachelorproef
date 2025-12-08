@@ -2,11 +2,11 @@
 \label{sec:inleiding}
 
 
-Bij het toekennen van zakelijke leningen moeten banken en kredietverstrekkers een nauwkeurige inschatting maken van het risico op wanbetaling. Momenteel baseren analisten zich voornamelijk op de meest recente jaarrekening van de specifieke onderneming, aangevuld met externe credit scores. Deze aanpak is echter reactief en isoleert het bedrijf vaak van zijn bredere sectorale context. Bovendien is het manueel vergelijken van een onderneming met al haar sectorgenoten een onbegonnen werk zonder de juiste technologische ondersteuning.
+Bij het toekennen van zakelijke leningen moeten banken en kredietverstrekkers een nauwkeurige inschatting maken van het risico op wanbetaling. Momenteel baseren analisten zich voornamelijk op de meest recente jaarrekening van de specifieke onderneming, aangevuld met externe credit scores. Deze aanpak is echter reactief en isoleert het bedrijf vaak van zijn bredere sectorale context. Het manueel vergelijken van een onderneming met al haar sectorgenoten zonder de juiste technologische ondersteuning is enorm resource-intesnief. Hoe gebeurd dit op de dag van vandaag?
 
 Dit onderzoek is bedoeld voor financiële risicoanalisten en beleidsmakers binnen banken die verantwoordelijk zijn voor het bepalen van leningsvoorwaarden (zoals rentevoeten en looptijden).
 
-De huidige methoden voor risicoanalyse maken onvoldoende gebruik van de enorme hoeveelheid beschikbare historische data, waardoor sector-brede trends en vroegtijdige waarschuwingssignalen voor falingen over het hoofd worden gezien.
+Maken de huidige methoden voor risicoanalyse voldoende gebruik van de enorme hoeveelheid beschikbare historische data? Indien ja, hoe wordt deze dataset aangeboden en gebruikt? Worden sector-brede trends en vroegtijdige waarschuwingssignalen alsnog over het hoofd gezien?
 
 Dit leidt tot de centrale onderzoeksvraag:
 \textit{In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?}
@@ -21,9 +21,9 @@ De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waar
 
 De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aan de hand van ratio-analyse (zoals liquiditeit, solvabiliteit en rentabiliteit) op basis van de jaarrekening~\autocite{Ooghe2020}. Er bestaan diverse modellen, zoals de Altman Z-score, die op basis van deze ratio's de kans op faillissement trachten te voorspellen.
 
-Echter, met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur toont aan dat het gebruik van cloud-native datawarehouses, zoals Google BigQuery, het mogelijk maakt om datasets van miljoenen rijen in seconden te verwerken~\autocite{Tigani2014}. Hierdoor wordt het mogelijk om niet enkel naar één bedrijf te kijken, maar de prestaties direct af te zetten tegenover "real-time" berekende sectorgemiddelden.
+Met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur toont aan dat het gebruik van cloud-native datawarehouses, zoals Google BigQuery, het mogelijk maakt om datasets van miljoenen rijen in seconden te verwerken~\autocite{Tigani2014}. Hierdoor wordt het mogelijk om niet enkel naar één bedrijf te kijken, maar de prestaties direct af te zetten tegenover "real-time" berekende sectorgemiddelden.
 
-Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Uitgebreide benchmarks van classificatie-algoritmen tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden~\autocite{Lessmann2015}. Het toepassen van deze algoritmen op de specifieke structuur van de Belgische NBB-dataset is een veelbelovende piste die in dit onderzoek verder verkend zal worden.
+Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Uitgebreide benchmarks van classificatie-algoritmen tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden~\autocite{Lessmann2015}. Kan Het toepassen van deze algoritmen op de specifieke structuur van de Belgische NBB-dataset accurate voorspellingen genereren?
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
@@ -35,8 +35,8 @@ Het onderzoek zal verlopen in vier fasen:
 
 \begin{enumerate}
     \item \textbf{Data Ingestie \& Engineering:} De data van de Nationale Bank van België wordt verkregen via hun Open Data portaal. Er wordt een ETL-pipeline (Extract, Transform, Load) opgezet om deze data, betreffende alle Belgische ondernemingen over de laatste drie boekjaren, op te schonen en in te laden in Google BigQuery.
-    \item \textbf{Groepering:} Op basis van NACE-codes worden ondernemingen geclassificeerd in financieel gelijkaardige groepen. Bedrijven binnen een groep moeten van een gelijkaardige grootte zijn en dezelfde markt bevoorraden.
-    \item \textbf{Empirische Studie:} Er wordt een eerste empirische studie uitgevoerd op de dataset. Zo kunnen oppervlakkige trends op basis van intuïtie beoordeeld worden.
+    \item \textbf{Groepering:} Op basis van NACE-codes worden ondernemingen geclassificeerd in financieel gelijkaardige groepen. Bedrijven binnen een groep moeten van een gelijkaardige grootte zijn en dezelfde markt bevoorraden, maar welke factoren moeten nog in rekening gebracht worden voor een zinvolle segmentatie?
+    \item \textbf{Empirische Studie:} Er wordt een eerste empirische studie uitgevoerd op de dataset. Zo kunnen oppervlakkige trends op basis van intuïtie beoordeeld worden. Kunnen hieruit al conclusies getrokken worden?
     \item \textbf{Voorspellende Analyse:} Er wordt per segment een experiment opgezet met een Machine Learning model (BigQuery ML, scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ enkele ratio's van jaar $X$ te voorspellen. De accuraatheid van deze modellen wordt getoetst.
 
 \end{enumerate}
@@ -63,4 +63,4 @@ Concreet verwacht ik:
     \item Een evaluatie van de haalbaarheid om jaarrekeningen te voorspellen: is de historische data van de NBB voldoende voorspellend voor de toekomst, of zijn er te veel externe factoren?
 \end{itemize}
 
-De meerwaarde voor de banksector is evident: door risico's beter in te schatten, kunnen leningen met meer precisie worden toegekend. Dit betekent lagere rentes voor gezonde bedrijven en bescherming voor de bank tegen 'bad debt' bij risicovolle ondernemingen. Indien het voorspellende model accuraat blijkt, kan dit het acceptatieproces voor leningen deels automatiseren.
+De gehoopte meerwaarde voor de banksector is evident: door risico's beter in te schatten, kunnen leningen met meer precisie worden toegekend. Dit betekent lagere rentes voor gezonde bedrijven en bescherming voor de bank tegen 'bad debt' bij risicovolle ondernemingen. Indien het voorspellende model accuraat blijkt, kan dit het acceptatieproces voor leningen deels automatiseren?
