@@ -4,12 +4,12 @@
 
 Bij het toekennen van zakelijke leningen moeten banken en kredietverstrekkers een nauwkeurige inschatting maken van het risico op wanbetaling. Momenteel baseren analisten zich voornamelijk op de meest recente jaarrekening van de specifieke onderneming, aangevuld met externe credit scores. Deze aanpak is echter reactief en isoleert het bedrijf vaak van zijn bredere sectorale context. Bovendien is het manueel vergelijken van een onderneming met al haar sectorgenoten een onbegonnen werk zonder de juiste technologische ondersteuning.
 
-Dit onderzoek kan interessant zijn voor financiële risicoanalisten en beleidsmakers binnen banken die verantwoordelijk zijn voor het bepalen van leningsvoorwaarden (zoals rentevoeten en looptijden).
+Dit onderzoek is bedoeld voor financiële risicoanalisten en beleidsmakers binnen banken die verantwoordelijk zijn voor het bepalen van leningsvoorwaarden (zoals rentevoeten en looptijden).
 
 De huidige methoden voor risicoanalyse maken onvoldoende gebruik van de enorme hoeveelheid beschikbare historische data, waardoor sector-brede trends en vroegtijdige waarschuwingssignalen voor falingen over het hoofd worden gezien.
 
 Dit leidt tot de centrale onderzoeksvraag:
-\textit{In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting en voorspelling van solvabiliteit bij kredietverlening?}
+\textit{In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?}
 
 De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database (Google BigQuery). Hiermee wordt dan gëxperimenteerd en getest indien sector-brede benchmarking en voorspellende analyses een meerwaarde kunnen bieden bovenop de klassieke dossierbehandeling.
 
@@ -29,15 +29,16 @@ Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voors
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Dit onderzoek volgt de methodologie van een \emph{constructief onderzoek} (design science), waarbij een artefact (de data-applicatie) wordt gebouwd en geëvalueerd.
+Dit onderzoek volgt de methodologie van een constructief onderzoek (design science), waarbij een dataset en algoritme/model worden gebouwd en geëvalueerd.
 
 Het onderzoek zal verlopen in vier fasen:
 
 \begin{enumerate}
     \item \textbf{Data Ingestie \& Engineering:} De data van de Nationale Bank van België wordt verkregen via hun Open Data portaal. Er wordt een ETL-pipeline (Extract, Transform, Load) opgezet om deze data, betreffende alle Belgische ondernemingen over de laatste drie boekjaren, op te schonen en in te laden in Google BigQuery.
-    \item \textbf{Beschrijvende Analyse:} Op basis van NACE-codes worden ondernemingen geclassificeerd in financieel gelijkaardige groepen. Bedrijven binnen een groep moeten een gelijkaardige grootte en mark hebben.
-    \item \textbf{Voorspellende Analyse:} Er wordt een experiment opgezet met een Machine Learning model (bijvoorbeeld via Python/scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ de resultaten van jaar $X$ te voorspellen. De accuraatheid van dit model wordt getoetst.
-    \item \textbf{Evaluatie:} De resultaten worden gevisualiseerd in een dashboard (bv. Tableau) om de bruikbaarheid voor een risicoanalist te evalueren. Kan de tool sneller een correct risicoprofiel schetsen dan een manuele analyse?
+    \item \textbf{Groepering:} Op basis van NACE-codes worden ondernemingen geclassificeerd in financieel gelijkaardige groepen. Bedrijven binnen een groep moeten van een gelijkaardige grootte zijn en dezelfde markt bevoorraden.
+    \item \textbf{Empirische Studie:} Er wordt een eerste empirische studie uitgevoerd op de dataset. Zo kunnen oppervlakkige trends op basis van intuïtie beoordeeld worden.
+    \item \textbf{Voorspellende Analyse:} Er wordt per segment een experiment opgezet met een Machine Learning model (BigQuery ML, scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ enkele ratio's van jaar $X$ te voorspellen. De accuraatheid van deze modellen wordt getoetst.
+
 \end{enumerate}
 
 De benodigde tools zijn Google Cloud Platform (Storage, BigQuery), Python (voor data manipulatie) en visualisatiesoftware.
@@ -46,21 +47,19 @@ Tijdschatting:
 \begin{itemize}
     \item Maand 1: Literatuurstudie en data-acquisitie NBB.
     \item Maand 2-3: Opzet BigQuery en ETL-pipeline.
-    \item Maand 4-5: Data-analyse en ontwikkeling voorspellend model.
-    \item Maand 6: Rapportage, visualisatie en conclusie.
+    \item Maand 4-5: Exploratieve analyse
+    \item Maand 6:Data-analyse en ontwikkeling voorspellend model.
 \end{itemize}
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
-
-
-Het verwachte eindresultaat is een werkende Proof of Concept van een risico-dashboard.
+Het verwachte eindresultaat is een bruikbare dataset voor efficiënte financiële analyses, aangevuld met enkele algoritmen die binnen een bepaalde sector financiële voorspellingen voor een specifieke onderneming kunnen doen.
 
 Concreet verwacht ik:
 \begin{itemize}
     \item Een gevulde BigQuery database die performant queries kan uitvoeren op de volledige Belgische bedrijfsdataset.
-    \item Inzicht in sector-specifieke trends: bijvoorbeeld, "Hoe presteert de horeca in West-Vlaanderen ten opzichte van het nationale gemiddelde?".
+    \item Inzicht in sector-specifieke trends: bijvoorbeeld, "Hoe presteert de horeca in West-Vlaanderen ten opzichte van het nationale gemiddelde?". "Welke impact heeft het man/vrouw ratio binnen een bedrijf op de omzetcijfers?"
     \item Een evaluatie van de haalbaarheid om jaarrekeningen te voorspellen: is de historische data van de NBB voldoende voorspellend voor de toekomst, of zijn er te veel externe factoren?
 \end{itemize}
 
