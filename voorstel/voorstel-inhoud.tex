@@ -1,7 +1,7 @@
 
 \textit{In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?}
 
-De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database (Google BigQuery). Hiermee wordt getest of sectorbrede benchmarking en voorspellende analyses een meerwaarde bieden bovenop de klassieke dossierbehandeling en bestaande consultatie-tools.
+De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database. Hiermee wordt getest of sectorbrede benchmarking en voorspellende analyses een meerwaarde bieden bovenop de klassieke dossierbehandeling en bestaande consultatie-tools.
 
 %---------- Stand van zaken ---------------------------------------------------
 
@@ -11,10 +11,10 @@ De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waar
 De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aan de hand van ratio-analyse (zoals liquiditeit, solvabiliteit en rentabiliteit) op basis van de jaarrekening \parencite{Ooghe2020}. Er bestaan diverse modellen, zoals de Altman Z-score, die op basis van deze ratio's de kans op faillissement trachten te voorspellen.
 
 \subsection{Bestaande Softwareoplossingen}
-Er is onderzoek gedaan naar reeds bestaande tools die deze data ontsluiten. Een prominent voorbeeld is \textbf{OpenTheBox} (https://openthebox.com), een platform dat bedrijfsstructuren en mandaten visualiseert en toegang biedt tot basisdata. Hoewel tools als OpenTheBox en Belfirst uitstekend zijn voor het \textit{raadplegen} van individuele dossiers en relaties, missen ze vaak de flexibiliteit voor grootschalige \textit{predictieve modellering} op ruwe data. Dit onderzoek onderscheidt zich door niet enkel data te tonen, maar door zelflerende algoritmes toe te passen op de volledige dataset om toekomstige ratio's te voorspellen.
+Gelijkaardige tools bestaan al en worden professioneel gebruikt. Een prominent voorbeeld is \textbf{OpenTheBox} (https://openthebox.com), een platform dat bedrijfsstructuren en mandaten visualiseert en toegang biedt tot basisdata. Hoewel tools als OpenTheBox en Belfirst uitstekend zijn voor het raadplegen van individuele dossiers en relaties, missen ze vaak de flexibiliteit voor grootschalige predictieve modellering op ruwe data. Dit onderzoek onderscheidt zich door niet enkel data te tonen, maar door algoritmes te ontwikkelen op de volledige dataset om toekomstige ratio's te voorspellen.
 
 \subsection{Technologische Context}
-Met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Vakliteratuur en benchmarks tonen aan dat cloud-native datawarehouses, zoals Google BigQuery, superieur zijn in het verwerken van datasets van miljoenen rijen ten opzichte van traditionele servers \parencite{Kaur2022}. De keuze voor BigQuery in dit onderzoek wordt gemotiveerd door de serverless architectuur, die kostenefficiënte en snelle sector-brede berekeningen mogelijk maakt \parencite{GoogleCloud2024}.
+Met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Cloud-native datawarehouses, zoals Google BigQuery, zijn superieur in het verwerken van datasets van miljoenen rijen ten opzichte van traditionele servers \parencite{Kaur2022}. De keuze voor BigQuery in dit onderzoek wordt gemotiveerd door de serverless architectuur, de lage kosten en performantie \parencite{GoogleCloud2024}.
 
 Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Recente studies tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden \parencite{Moscato2021}. Het toepassen van deze algoritmen op de specifieke structuur van de NBB-dataset staat centraal in dit onderzoek.
 
@@ -49,7 +49,7 @@ Tijdschatting:
 
 Het verwachte eindresultaat is een bruikbare dataset voor efficiënte financiële analyses, aangevuld met algoritmen die binnen een bepaalde sector financiële voorspellingen voor een specifieke onderneming kunnen doen.
 
-Concreet verwacht ik:
+Concreet verwacht:
 \begin{itemize}
     \item Een gevulde BigQuery database die performant queries kan uitvoeren op de volledige Belgische bedrijfsdataset.
     \item Inzicht in sector-specifieke trends (bijv. "Hoe presteert de horeca in West-Vlaanderen t.o.v. het nationale gemiddelde?").
