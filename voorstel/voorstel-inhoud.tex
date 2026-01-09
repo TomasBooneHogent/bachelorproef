@@ -1,22 +1,36 @@
+\section{Inleiding}%
+\label{sec:inleiding}
 
+
+Bij het toekennen van zakelijke leningen moeten banken en kredietverstrekkers een nauwkeurige inschatting maken van het risico op wanbetaling. Momenteel baseren analisten zich voornamelijk op de meest recente jaarrekening van de specifieke onderneming, aangevuld met externe credit scores. Deze aanpak is echter reactief en isoleert het bedrijf vaak van zijn bredere sectorale context. Het manueel vergelijken van een onderneming met al haar sectorgenoten zonder de juiste technologische ondersteuning is enorm arbeidsintensief. Hoe gebeurt dit op de dag van vandaag?
+
+Dit onderzoek is bedoeld voor financiële risicoanalisten en beleidsmakers binnen banken die verantwoordelijk zijn voor het bepalen van leningsvoorwaarden (zoals rentevoeten en looptijden).
+
+Maken de huidige methoden voor risicoanalyse voldoende gebruik van de enorme hoeveelheid beschikbare historische data? Indien ja, hoe wordt deze dataset aangeboden en gebruikt? Worden sectorbrede trends en vroegtijdige waarschuwingssignalen alsnog over het hoofd gezien?
+
+Dit leidt tot de centrale onderzoeksvraag:
 \textit{In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?}
 
-De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database. Hiermee wordt getest of sectorbrede benchmarking en voorspellende analyses een meerwaarde bieden bovenop de klassieke dossierbehandeling en bestaande consultatie-tools.
+De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database (Google BigQuery). Hiermee wordt dan geëxperimenteerd en getest of sectorbrede benchmarking en voorspellende analyses een meerwaarde kunnen bieden bovenop de klassieke dossierbehandeling.
 
 %---------- Stand van zaken ---------------------------------------------------
 
-\section{Literatuurstudie en Bestaande Tools}%
+\section{Literatuurstudie}%
+%---------- Stand van zaken ---------------------------------------------------
+
 \label{sec:stand-van-zaken}
 
-De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aan de hand van ratio-analyse (zoals liquiditeit, solvabiliteit en rentabiliteit) op basis van de jaarrekening \parencite{Ooghe2020}. Er bestaan diverse modellen, zoals de Altman Z-score, die op basis van deze ratio's de kans op faillissement trachten te voorspellen.
+De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aan de hand van ratio-analyse (zoals liquiditeit, solvabiliteit en rentabiliteit) op basis van de jaarrekening \parencite{Ooghe2021}. Er bestaan diverse modellen, zoals de Altman Z-score, die op basis van deze ratio's de kans op faillissement trachten te voorspellen.
 
 \subsection{Bestaande Softwareoplossingen}
-Gelijkaardige tools bestaan al en worden professioneel gebruikt. Een prominent voorbeeld is \textbf{OpenTheBox} (https://openthebox.com), een platform dat bedrijfsstructuren en mandaten visualiseert en toegang biedt tot basisdata. Hoewel tools als OpenTheBox en Belfirst uitstekend zijn voor het raadplegen van individuele dossiers en relaties, missen ze vaak de flexibiliteit voor grootschalige predictieve modellering op ruwe data. Dit onderzoek onderscheidt zich door niet enkel data te tonen, maar door algoritmes te ontwikkelen op de volledige dataset om toekomstige ratio's te voorspellen.
+Gelijkaardige tools bestaan al en worden professioneel gebruikt. Een prominent voorbeeld is \textbf{OpenTheBox} (https://openthebox.com), een platform dat bedrijfsstructuren en mandaten visualiseert en toegang biedt tot basisdata. Hoewel tools als OpenTheBox en Belfirst uitstekend zijn voor het raadplegen van individuele dossiers en relaties, missen ze vaak de flexibiliteit voor grootschalige predictieve modellering en exploratieve analyse op ruwe data. Dit onderzoek onderscheidt zich door niet enkel individuele data te tonen, maar door een kwalitatieve volledige dataset te ontwikkelen samen met algoritmen om toekomstige ratio's te voorspellen.
 
 \subsection{Technologische Context}
 Met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Cloud-native datawarehouses, zoals Google BigQuery, zijn superieur in het verwerken van datasets van miljoenen rijen ten opzichte van traditionele servers \parencite{Kaur2022}. De keuze voor BigQuery in dit onderzoek wordt gemotiveerd door de serverless architectuur, de lage kosten en performantie \parencite{GoogleCloud2024}.
 
-Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Recente studies tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden \parencite{Moscato2021}. Het toepassen van deze algoritmen op de specifieke structuur van de NBB-dataset staat centraal in dit onderzoek.
+Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Recente studies tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden \parencite{Moscato2021}. Kan Het toepassen van deze al-
+goritmen op de specifieke structuur van de NBB-
+dataset accurate voorspellingen genereren?
 
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
@@ -28,12 +42,13 @@ Het onderzoek zal verlopen in vier fasen:
 
 \begin{enumerate}
     \item \textbf{Data Ingestie \& Engineering:} De data van de Nationale Bank van België wordt verkregen via het Open Data portaal. In tegenstelling tot het gebruik van een kant-en-klare interface (zoals OpenTheBox), wordt hier een eigen ETL-pipeline (Extract, Transform, Load) opgezet. Dit is noodzakelijk om volledige controle te hebben over de ruwe data voor het trainen van ML-modellen in Google BigQuery.
-    \item \textbf{Groepering:} Op basis van NACE-codes worden ondernemingen geclassificeerd in financieel gelijkaardige groepen. Bedrijven binnen een groep moeten van een gelijkaardige grootte zijn en dezelfde markt bedienen. Er wordt onderzocht welke factoren nog in rekening gebracht moeten worden voor een zinvolle segmentatie.
-    \item \textbf{Empirische Studie:} Er wordt een eerste empirische studie uitgevoerd op de dataset om oppervlakkige trends te beoordelen. Hierbij wordt gekeken of de trends die zichtbaar zijn in de database overeenkomen met marktinzichten.
-    \item \textbf{Voorspellende Analyse:} Er wordt per segment een experiment opgezet met een Machine Learning model (BigQuery ML) om op basis van de historie van jaar $X-2$ en $X-1$ enkele ratio's van jaar $X$ te voorspellen. De accuraatheid van deze modellen wordt getoetst en vergeleken met traditionele lineaire extrapolatie.
+    \item \textbf{Groepering:} Op basis van NACE-codes worden ondernemingen geclassificeerd in financieel gelijkaardige groepen. Bedrijven binnen een groep moeten van een gelijkaardige grootte zijn en dezelfde markt bedienen, maar welke factoren moeten nog in rekening gebracht worden voor een zinvolle segmentatie?
+    \item \textbf{Empirische Studie:} Er wordt een eerste empirische studie uitgevoerd op de dataset. Zo kunnen oppervlakkige trends op basis van intuïtie beoordeeld worden. Kunnen hieruit al conclusies getrokken worden?
+    \item \textbf{Voorspellende Analyse:} Er wordt per segment een experiment opgezet met een Machine Learning model (BigQuery ML, scikit-learn) om op basis van de historie van jaar $X-2$ en $X-1$ enkele ratio's van jaar $X$ te voorspellen. De accuraatheid van deze modellen wordt getoetst.
+
 \end{enumerate}
 
-De benodigde tools zijn Google Cloud Platform (voor opslag en rekenkracht) en Python (voor datamanipulatie).
+De benodigde tools zijn Google Cloud Platform (Storage, BigQuery), Python (voor datamanipulatie) en visualisatiesoftware.
 
 Tijdschatting:
 \begin{itemize}
@@ -52,9 +67,8 @@ Het verwachte eindresultaat is een bruikbare dataset voor efficiënte financiël
 Concreet verwacht:
 \begin{itemize}
     \item Een gevulde BigQuery database die performant queries kan uitvoeren op de volledige Belgische bedrijfsdataset.
-    \item Inzicht in sector-specifieke trends (bijv. "Hoe presteert de horeca in West-Vlaanderen t.o.v. het nationale gemiddelde?").
-    \item Een evaluatie van de haalbaarheid om jaarrekeningen te voorspellen: is de historische data van de NBB voldoende voorspellend voor de toekomst?
+    \item Inzicht in sector-specifieke trends: bijvoorbeeld, "Hoe presteert de horeca in West-Vlaanderen ten opzichte van het nationale gemiddelde?". "Welke impact heeft het man-vrouwratio binnen een bedrijf op de omzetcijfers?"
+    \item Een evaluatie van de haalbaarheid om jaarrekeningen te voorspellen: is de historische data van de NBB voldoende voorspellend voor de toekomst, of zijn er te veel externe factoren?
 \end{itemize}
 
-De gehoopte meerwaarde voor de banksector is: door risico's beter in te schatten via geautomatiseerde ML-modellen, kunnen leningen met meer precisie worden toegekend. Dit gaat verder dan wat huidige visualisatietools bieden en kan leiden tot een deels geautomatiseerd acceptatieproces.
-
+De gehoopte meerwaarde voor de banksector is: door risico's beter in te schatten via geautomatiseerde ML- en empirische sectorbrede analyses, kunnen leningen met meer precisie worden toegekend. Dit gaat verder dan wat huidige visualisatietools bieden en kan leiden tot een deels geautomatiseerd acceptatieproces. Een nadeel is dat het correct en efficiënt begruiken van een grote dataset ingewikkelder is en een bepaalde expertise vergt.
