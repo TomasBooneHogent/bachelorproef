@@ -9,10 +9,8 @@ Dit leidt tot de centrale onderzoeksvraag:
 \textit{In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?}
 De onderzoeksdoelstelling is het ontwikkelen van een Proof of Concept (PoC) waarbij de volledige dataset van de Nationale Bank van België (alle neerleggingen van de afgelopen drie jaar) wordt ingeladen in een schaalbare database (Google BigQuery). Hiermee wordt dan geëxperimenteerd en getest of sectorbrede benchmarking en voorspellende analyses een meerwaarde kunnen bieden bovenop de klassieke dossierbehandeling.
 
-%---------- Stand van zaken ---------------------------------------------------
 
 \section{Literatuurstudie}%
-%---------- Stand van zaken ---------------------------------------------------
 
 \label{sec:stand-van-zaken}
 
@@ -22,16 +20,17 @@ De financiële gezondheid van een onderneming wordt traditioneel geëvalueerd aa
 Gelijkaardige tools bestaan al en worden professioneel gebruikt. Enkele voorbeeld zijn Belfirst en OpenTheBox (https://openthebox.com), een platform dat bedrijfsstructuren en mandaten visualiseert en toegang biedt tot sector gemiddelde ratios. Hoewel tools als OpenTheBox en Belfirst uitstekend zijn voor het raadplegen van individuele dossiers en relaties, missen ze vaak de flexibiliteit voor grootschalige predictieve modellering en exploratieve analyse op ruwe data. Dit onderzoek onderscheidt zich door niet enkel individuele of beperkte data te tonen, maar door een kwalitatieve volledige dataset te ontwikkelen om toekomstige ratio's te voorspellen of te verklaren. Dit vergt een technische kennis van de eindgebruiker maar vermindert de financiële kost en geeft meer mogelijkheden.
 
 \subsection{Technologische Context}
-Met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Cloud-native datawarehouses, zoals Google BigQuery, zijn superieur in het verwerken van datasets van miljoenen rijen ten opzichte van traditionele servers \parencite{Kaur2022}. De keuze voor BigQuery in dit onderzoek wordt gemotiveerd door de serverless architectuur, de lage kosten, performantie en ervaring \parencite{GoogleCloud2024}.
-Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Recente studies tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden \parencite{Moscato2021}. Kan Het toepassen van deze al-
+Met de opkomst van 'FinTech' verschuift de focus van statische analyse naar dynamische Big Data-toepassingen. Cloud-native datawarehouses, zoals Google BigQuery, zijn superieur in het verwerken van datasets van miljoenen rijen ten opzichte van traditionele servers \parencite{Gupta2024}.
+Daarnaast is er in het domein van Machine Learning veel onderzoek naar het voorspellen van kredietrisico's. Recente studies tonen aan dat moderne technieken (zoals ensemble learning) vaak beter presteren dan de traditionele statistische methoden \parencite{Moscato2021}. Kan het toepassen van deze al-
 goritmen op de specifieke structuur van de NBB-
 dataset accurate voorspellingen genereren?
 
-%---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
 
-Dit onderzoek volgt de methodologie van een constructief onderzoek (design science), waarbij een dataset en algoritme/model worden gebouwd en geëvalueerd.
+Dit onderzoek volgt de methodologie van een constructief onderzoek (design science), waarbij een dataset en algoritme/model worden gebouwd en geëvalueerd. De keuze voor BigQuery in dit onderzoek wordt gemotiveerd door de serverless architectuur, de lage kosten, performantie en ervaring \parencite{GoogleCloud2024}.
+Het BigQuery-platform wordt in de financiële sector reeds toegepast voor grootschalige data-analyse en risicobeheer, voor het uitvoeren van complexe markt-, krediet- en liquiditeitsrisicoanalyses die inherent zijn aan de specifieke behoeften van de financiële dienstverlening \parencite{ActiveViamBigQuery}.
+
 Het onderzoek zal verlopen in vier fasen:
 
 \begin{enumerate}
@@ -51,7 +50,6 @@ Tijdschatting:
     \item Maand 6: Data-analyse en ontwikkeling voorspellend model.
 \end{itemize}
 
-%---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
 \label{sec:verwachte_resultaten}
 
