@@ -5,46 +5,43 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}%
 \label{ch:inleiding}
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
-
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
+Bij het toekennen van zakelijke leningen staan banken en kredietverstrekkers voor de uitdaging om een nauwkeurige inschatting te maken van het risico op wanbetaling. Om gefundeerde beslissingen te nemen rond rentevoeten en looptijden, analyseren financiële risicoanalisten en beleidsmakers de financiële gezondheid van een aanvragende onderneming. Analisten baseren zich in de huidige praktijk voornamelijk op de meest recente jaarrekening van de specifieke onderneming, vaak aangevuld met externe credit scores. Deze traditionele aanpak focust zich sterk op individuele dossiers, waardoor het grote plaatje soms ontbreekt.
 
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's'', systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
-
-\section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
-\label{sec:onderzoeksvraag}
-
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+De huidige werkwijze voor financiële risicoanalyse is overwegend reactief. Door sterk te focussen op individuele, historische jaarrekeningen, isoleert het proces de onderneming van haar bredere sectorale context. Een bedrijf presteert immers nooit in een vacuüm; de prestaties hangen nauw samen met sectorbrede economische verschuivingen. Het handmatig vergelijken van de cijfers van een onderneming met al haar sectorgenoten vormt echter een enorm arbeidsintensief proces, zeker zonder de juiste technologische ondersteuning. Bijgevolg blijven sectorbrede trends en vroegtijdige waarschuwingssignalen voor wanbetaling vaak over het hoofd gezien, wat resulteert in een suboptimale risico-inschatting en potentieel financiële verliezen voor de kredietverstrekker.
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
 
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv.\ om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+Dit onderzoek heeft als doel de kredietverleningsprocessen binnen banken te optimaliseren door middel van datagedreven technologieën. Het concrete eindresultaat is de ontwikkeling van een Proof of Concept (PoC). Binnen deze PoC verzamelt een geautomatiseerde pijplijn de volledige dataset van de Nationale Bank van België (NBB) van de afgelopen drie jaar, om deze vervolgens in te laden in een schaalbare database. De opzet fungeert als fundament voor experimenten rond sectorbrede benchmarking en predictieve analyses, om te testen of dergelijke methoden een aantoonbare meerwaarde bieden bovenop de klassieke dossierbehandeling.
+
+\section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
+\label{sec:onderzoeksvraag}
+
+Om tegemoet te komen aan de probleemstelling en de doelstelling te behalen, hanteert dit onderzoek de volgende centrale onderzoeksvraag:
+
+\begin{displayquote}
+In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?
+\end{displayquote}
+
+Om deze centrale vraag te structureren en systematisch te beantwoorden, formuleert het onderzoek volgende deelvragen:
+\begin{enumerate}
+    \item Welke technieken en architectuurpatronen zijn optimaal voor het structureel extraheren, transformeren en laden (ETL) van de NBB-dataset?
+    \item Welke factoren bepalen een zinvolle segmentatie of clustering van ondernemingen om een representatieve sector-benchmark te bekomen?
+    \item Welke machine learning-modellen zijn geschikt om op basis van historische financiële ratio's toekomstige bedrijfsprestaties te voorspellen?
+    \item Welke impact heeft het implementeren van een Big Data-platform op de werkwijze van de financiële analist?
+\end{enumerate}
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
 \label{sec:opzet-bachelorproef}
 
-% Het is gebruikelijk aan het einde van de inleiding een overzicht te
-% geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
-% die je kan aanvullen/aanpassen in functie van je eigen tekst.
-
 De rest van deze bachelorproef is als volgt opgebouwd:
 
-In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
+In Hoofdstuk~\ref{ch:stand-van-zaken} volgt een uitgebreid literatuuroverzicht dat de stand van zaken binnen de traditionele ratio-analyse, beschikbare softwareoplossingen en de technologische verschuivingen naar Big Data en Machine Learning in kaart brengt. In Hoofdstuk~\ref{ch:methodologie} verantwoordt de tekst de gekozen onderzoeksstrategie en beschrijft het de vier fasen van de proof of concept.
 
-In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
+% TODO: Voeg hier een korte beschrijving toe van je resterende hoofdstukken (bijv. resultaten) zodra je deze uitschrijft. Voorbeeld:
+% In Hoofdstuk 4 wordt de opbouw van de architectuur en de ETL-pijplijn gedocumenteerd, waarna Hoofdstuk 5 de resultaten van de machine learning modellen toelicht.
 
-% TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
-
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+In Hoofdstuk~\ref{ch:conclusie}, tenslotte, geeft het onderzoek een antwoord op de onderzoeksvragen, bediscussieert het de relevantie van de bevindingen voor het werkveld en reikt het suggesties aan voor verder onderzoek.

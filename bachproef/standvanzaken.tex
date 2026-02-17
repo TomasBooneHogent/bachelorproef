@@ -1,51 +1,18 @@
 \chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}%
 \label{ch:stand-van-zaken}
 
-% Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
-% dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
-% bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
+Dit hoofdstuk schetst het theoretisch kader voor het evalueren van kredietrisico's en de rol van datatechnologie daarin. Om de centrale onderzoeksvraag te kunnen beantwoorden, analyseert de literatuurstudie eerst de traditionele methodieken rond kredietrisicoanalyse en de beperkingen van de huidige softwareoplossingen. Vervolgens verschuift de focus naar de technologische context, waarbij de mogelijkheden van cloud-datawarehouses en machine learning-algoritmen (ML) binnen de financiële sector (FinTech) worden belicht.
 
-% Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
+\section{Traditionele Risicoanalyse en Bestaande Software}
 
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+De financiële gezondheid van een onderneming evalueert men traditioneel aan de hand van ratio-analyse. Analisten berekenen indicatoren zoals liquiditeit, solvabiliteit en rentabiliteit op basis van de neergelegde jaarrekeningen \autocite{Ooghe2021}. Modellen, zoals de Altman Z-score, proberen op basis van deze ratio's de kans op een eventueel faillissement te voorspellen.
 
-Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz.\ naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin (narratieve referentie), gebruik je \texttt{$\backslash${}textcite\{\}}. Soms is de auteursnaam niet expliciet een onderdeel van de zin, dan gebruik je \texttt{$\backslash${}autocite\{\}} (referentie tussen haakjes). Dit gebruik je bv.~bij een citaat, of om in het bijschrift van een overgenomen afbeelding, broncode, tabel, enz. te verwijzen naar de bron. In de volgende paragraaf een voorbeeld van elk.
+Om dit proces efficiënter te maken voor de analist, biedt de markt diverse softwaretoepassingen aan, waaronder Companyweb, Belfirst en OpenTheBox. Deze platformen slagen erin bedrijfsstructuren te visualiseren en geven toegang tot sectorgemiddelde ratio's. Hoewel deze tools uitstekend presteren voor het raadplegen van individuele klantdossiers, missen ze vaak de flexibiliteit om grootschalige, op maat gemaakte predictieve modellering uit te voeren op ruwe data. Gebruikers zijn gebonden aan de visualisaties en berekeningen die de softwareleverancier voorziet, wat exploratieve analyse op grotere schaal belemmert.
 
-\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+\section{Big Data en Cloud Computing in FinTech}
 
-Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van een paragraaf.
+De opkomst van 'FinTech' brengt een verschuiving teweeg van statische analyses naar dynamische, datagedreven toepassingen. Binnen dit domein blijken cloud-native datawarehouses cruciaal. Architecturen zoals Google BigQuery vertonen superieure prestaties bij het verwerken van datasets met miljoenen rijen in vergelijking met traditionele, on-premise servers \autocite{Gupta2024}. BigQuery typeert zich door een serverless opbouw en laat financiële instellingen toe om complexe markt- en kredietrisicoanalyses uit te voeren op een kostenefficiënte en uiterst performante manier \autocite{ActiveViam2025}.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.8\textwidth]{grail.jpg}
-  \caption[Voorbeeld figuur.]{\label{fig:grail}Voorbeeld van invoegen van een figuur. Zorg altijd voor een uitgebreid bijschrift dat de figuur volledig beschrijft zonder in de tekst te moeten gaan zoeken. Vergeet ook je bronvermelding niet!}
-\end{figure}
+\section{Machine Learning voor Kredietrisico}
 
-\begin{listing}
-  \begin{minted}{python}
-    import pandas as pd
-    import seaborn as sns
-
-    penguins = sns.load_dataset('penguins')
-    sns.relplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", hue="species")
-  \end{minted}
-  \caption[Voorbeeld codefragment]{Voorbeeld van het invoegen van een codefragment.}
-\end{listing}
-
-\lipsum[7-20]
-
-\begin{table}
-  \centering
-  \begin{tabular}{lcr}
-    \toprule
-    \textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
-    $\alpha$         & $\beta$          & $\gamma$         \\
-    \midrule
-    A                & 10.230           & a                \\
-    B                & 45.678           & b                \\
-    C                & 99.987           & c                \\
-    \bottomrule
-  \end{tabular}
-  \caption[Voorbeeld tabel]{\label{tab:example}Voorbeeld van een tabel.}
-\end{table}
-
+Naast de opslag en verwerking van Big Data, besteedt de literatuur veel aandacht aan de inzet van Machine Learning voor het voorspellen van kredietrisico's. Waar financiële instellingen voorheen hoofdzakelijk teruggrepen naar traditionele statistische methoden, tonen recente studies aan dat moderne technieken aanzienlijk beter presteren. Volgens \textcite{Moscato2021} bieden vooral geavanceerde algoritmen, zoals ensemble learning, een hogere accuraatheid bij \textit{credit scoring}. De integratie van zulke ML-technieken, gecombineerd met de rekenkracht van cloud-datawarehouses en gestructureerde datasets zoals die van de Nationale Bank van België, biedt hierdoor nieuwe perspectieven voor een proactiever en nauwkeuriger acceptatiebeleid in de kredietverlening.

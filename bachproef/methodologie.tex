@@ -5,26 +5,18 @@
 \chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
 \label{ch:methodologie}
 
-%% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
-%% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
-%% de doelstelling was, welke deliverables daar uit gekomen zijn, en welke
-%% onderzoeksmethoden je daarbij toegepast hebt. Verantwoord waarom je
-%% op deze manier te werk gegaan bent.
-%% 
-%% Voorbeelden van zulke fasen zijn: literatuurstudie, opstellen van een
-%% requirements-analyse, opstellen long-list (bij vergelijkende studie),
-%% selectie van geschikte tools (bij vergelijkende studie, "short-list"),
-%% opzetten testopstelling/PoC, uitvoeren testen en verzamelen
-%% van resultaten, analyse van resultaten, ...
-%%
-%% !!!!! LET OP !!!!!
-%%
-%% Het is uitdrukkelijk NIET de bedoeling dat je het grootste deel van de corpus
-%% van je bachelorproef in dit hoofstuk verwerkt! Dit hoofdstuk is eerder een
-%% kort overzicht van je plan van aanpak.
-%%
-%% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
-%% en geef het een gepaste titel.
+Dit onderzoek volgt de methodologie van \textit{design science research} (constructief onderzoek). Bij deze aanpak ontwikkelt en evalueert de onderzoeker een artefact -- in dit geval een Proof of Concept (PoC) bestaande uit een cloud-architectuur en predictieve modellen -- om een concreet probleem uit de praktijk op te lossen. De technologische realisatie steunt voornamelijk op Google Cloud Platform (waaronder Cloud Storage en BigQuery) vanwege de serverless architectuur, lage kosten en hoge performantie \autocite{GoogleCloud2024}. Voor de datamanipulatie en modeltraining wordt gebruikgemaakt van de programmeertaal Python.
 
-\lipsum[21-25]
+Het onderzoek verloopt gestructureerd via vier grote fasen.
 
+\section{Fase 1: Data Ingestie en Engineering}
+In de eerste fase verkrijgt het onderzoek data van de Nationale Bank van België (NBB) via het Open Data portaal. Om deze ongestructureerde of ruwe data bruikbaar te maken, ontwikkelt het onderzoek een eigen ETL-pipeline (Extract, Transform, Load). Deze pipeline garandeert volledige controle over de structuur van de data. Een opgeschoonde dataset vormt de absolute vereiste om in latere stappen sectoren correct te classificeren en algoritmen effectief te trainen.
+
+\section{Fase 2: Groepering en Segmentatie}
+Tijdens de tweede fase clustert de PoC de ondernemingen in financieel gelijkaardige groepen. De initiële classificatie gebeurt op basis van NACE-codes, wat toelaat om bedrijven binnen een specifieke markt af te lijnen. Het onderzoek analyseert tevens welke bijkomende variabelen, zoals bedrijfsgrootte of regio, in rekening gebracht moeten worden om tot een zo zinvol mogelijke segmentatie te komen.
+
+\section{Fase 3: Empirische Studie}
+Na het groeperen volgt een empirische studie van de data in de geconstrueerde omgeving. Door oppervlakkige trends in kaart te brengen en te valideren aan de hand van bestaande financiële intuïtie, controleert deze fase de validiteit van de data. Deze exploratieve analyse helpt bij het identificeren van ontbrekende waarden en vormt de basis voor het definiëren van de parameters (features) voor het predictieve model.
+
+\section{Fase 4: Voorspellende Analyse}
+In de laatste fase configureert en traint het onderzoek per segment een Machine Learning-model. Dit gebeurt met behulp van frameworks zoals BigQuery ML en scikit-learn. De doelstelling hierbij is om op basis van de historische financiële prestaties (bijvoorbeeld het jaar X-2 en X-1) de kritieke ratio's of het risicoprofiel voor jaar X te voorspellen. Ten slotte toetst de onderzoeker de accuraatheid van deze modellen af om te bepalen in welke mate historische NBB-data voldoende voorspellende waarde bevatten.
