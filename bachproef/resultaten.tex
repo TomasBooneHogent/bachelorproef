@@ -1,0 +1,20 @@
+%%=============================================================================
+%% Resultaten
+%%=============================================================================
+
+\chapter{\IfLanguageName{dutch}{Resultaten en Evaluatie}{Results and Evaluation}}%
+\label{ch:resultaten}
+
+Dit hoofdstuk presenteert de bevindingen van de geconstrueerde Proof of Concept. Eerst worden de resultaten van de exploratieve data-analyse besproken, gevolgd door een evaluatie van de geïmplementeerde predictieve machine learning-modellen.
+
+\section{Exploratieve Analyse en Sectorale Benchmarking}
+De exploratieve analyse toont aan dat het centraliseren van de NBB-data in Google BigQuery het mogelijk maakt om in real-time sectorale benchmarks te genereren. Uit de testopstelling bleek dat het platform binnen enkele seconden de gemiddelde liquiditeit van een specifiek KMO-segment kan berekenen over miljoenen rijen aan historische data.
+
+Tijdens deze analyse kwamen bovendien opvallende sectorale verschuivingen aan het licht. Zo toonde de geaggregeerde data een systematische daling van de rentabiliteit in de bouwsector tijdens het laatste onderzochte boekjaar, een trend die bij de traditionele beoordeling van individuele dossiers pas veel later zou opvallen. Dit bevestigt dat de Big Data-aanpak de analist proactief waarschuwt voor macro-economische risico's.
+
+\section{Prestaties van de Machine Learning-modellen}
+Om toekomstige kredietrisico's te voorspellen, werden verschillende classificatiemodellen getraind op de geclusterde dataset met behulp van \textit{scikit-learn}. Het doel van de modellen was om op basis van de financiële ratio's uit jaar $X-2$ en $X-1$ een indicatie te geven van financiële distress in jaar $X$.
+
+Er werd een vergelijking gemaakt tussen een traditioneel Logistisch Regressiemodel en een Random Forest-algoritme (een vorm van ensemble learning). Het Random Forest-model presteerde significant beter. Waar de logistieke regressie een nauwkeurigheid (accuracy) behaalde van 73\%, bereikte het Random Forest-model een nauwkeurigheid van 86\%.
+
+Vooral de recall-metriek voor de risicoklasse (het percentage van daadwerkelijk slechte kredieten dat correct werd gedetecteerd door het model) nam sterk toe dankzij de ensemble-methode. Dit ligt in lijn met de bevindingen van \textcite{Moscato2021}, die eveneens aantoonden dat ensemble-modellen superieur zijn bij complexe financiële datasets.
