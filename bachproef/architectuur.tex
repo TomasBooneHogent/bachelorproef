@@ -1,0 +1,21 @@
+%%=============================================================================
+%% Architectuur en Implementatie
+%%=============================================================================
+
+\chapter{\IfLanguageName{dutch}{Architectuur en Implementatie}{Architecture and Implementation}}%
+\label{ch:architectuur}
+
+Dit hoofdstuk beschrijft de technische realisatie van de Proof of Concept (PoC). Om de afhankelijkheid van statische kredietanalyses te doorbreken, werd een schaalbare cloud-architectuur ontworpen. De focus ligt op het automatiseren van de data-ingestie en het voorbereiden van de dataset voor latere machine learning-toepassingen.
+
+\section{Data-ingestie en ETL-pipeline}
+De basis van het platform vormt de dataset van de Nationale Bank van België (NBB). Via het open data-portaal van de NBB werden de gestandaardiseerde jaarrekeningen van Belgische ondernemingen over de voorbije drie boekjaren verzameld.
+
+Om deze ruwe data om te zetten naar een bruikbaar formaat, werd een ETL-pipeline (Extract, Transform, Load) ontwikkeld in Python. Tijdens de extractiefase haalt een geautomatiseerd script de XML- en CSV-bestanden op. De transformatiefase, gebouwd met de \textit{pandas}-bibliotheek, reinigt de data door ontbrekende waarden (NaN) te verwerken en irrelevante velden te verwijderen. Tevens berekent het script hier de eerste afgeleide financiële ratio's, zoals de liquiditeits- en solvabiliteitsgraad, op basis van de aanwezige absolute bedragen. Ten slotte laadt de pipeline de gestructureerde data in het cloud-datawarehouse.
+
+\section{Cloud Datawarehouse: Google BigQuery}
+Voor de opslag en verwerking van de gegevens viel de keuze op Google BigQuery. Zoals \textcite{GoogleCloud2024} aangeeft, biedt deze serverless infrastructuur de mogelijkheid om enorme datasets te bevragen zonder dat de gebruiker de onderliggende infrastructuur moet beheren.
+
+Binnen BigQuery werden de gegevens gestructureerd in een sterschema (star schema). Een centrale feitentabel bevat de berekende financiële ratio's per boekjaar, gekoppeld aan dimensietabellen met statische bedrijfsinformatie, zoals de NACE-code (sector) en de geografische locatie. Deze opzet garandeert snelle query-prestaties bij het aggregeren van sectorgemiddelden, wat een cruciale stap is voor de latere benchmarking.
+
+\section{Clustering en Segmentatie}
+Om bedrijven accuraat te kunnen vergelijken, volstaat het niet om uitsluitend naar de NACE-code te kijken. Binnen eenzelfde sector bestaan immers grote verschillen tussen start-ups en gevestigde multinationals. Daarom implementeert het platform een K-Means clusteringalgoritme. Dit algoritme segmenteert de ondernemingen op basis van de NACE-code in combinatie met de bedrijfsgrootte (balanstotaal) en de leeftijd van de onderneming. Het resultaat is een dynamische benchmark waarbij een kredietaanvraag enkel vergeleken wordt met de prestaties van haar werkelijke concurrenten (peers).

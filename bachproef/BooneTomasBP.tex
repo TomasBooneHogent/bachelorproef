@@ -35,17 +35,18 @@
     \listof{listing}{\listoflistingscaption}%
 }
 
+
 %%---------- Document metadata -------------------------------------------------
 \author{Tomas Boone}
-\supervisor{Dhr. [Naam Promotor]} % TODO: Vul in
+\supervisor{Dhr. Bosteels}
 \cosupervisor{Dhr. T. Vanhooren}
 \title[Een Proof of Concept op Basis van NBB-Data]%
     {Big Data voor Kredietrisicoanalyse}
-\academicyear{2022--2023} % TODO: Pas eventueel aan naar huidig academiejaar
+\academicyear{2023--2024} % Aangepast naar recenter jaar, check of dit klopt
 \examperiod{1}
 \degreesought{\IfLanguageName{dutch}{Professionele bachelor in de toegepaste informatica}{Bachelor of applied computer science}}
 \partialthesis{false} %% To display 'in partial fulfilment'
-\institution{VDK Bank} % TODO: Pas aan indien nodig
+\institution{VDK Bank}
 
 %% Add global exceptions to the hyphenation here
 \hyphenation{back-slash}
@@ -81,13 +82,17 @@
 \listoflistings
 
 %---------- Kern ---------------------------------------------------------------
+
 \mainmatter{}
 
 \input{inleiding}
 \input{standvanzaken}
 \input{methodologie}
-% TODO: Voeg hier later je eigen hoofdstukken toe (bijv. \input{architectuur}, \input{resultaten})
+\input{architectuur}
+\input{resultaten}
 \input{conclusie}
+
+
 
 %---------- Bijlagen -----------------------------------------------------------
 \appendix
@@ -95,7 +100,6 @@
 \chapter{Onderzoeksvoorstel}
 Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat vooraf werd beoordeeld door de promotor. Dat voorstel is opgenomen in deze bijlage.
 
-% Verwijzing naar het bestand met de inhoud van het onderzoeksvoorstel
 \input{../voorstel/voorstel-inhoud}
 
 %%---------- Backmatter, referentielijst ---------------------------------------

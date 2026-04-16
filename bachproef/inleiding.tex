@@ -10,11 +10,12 @@ Bij het toekennen van zakelijke leningen staan banken en kredietverstrekkers voo
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 \label{sec:probleemstelling}
 
-De huidige werkwijze voor financiële risicoanalyse is overwegend reactief. Door sterk te focussen op individuele, historische jaarrekeningen, isoleert het traditionele proces de onderneming van haar bredere sectorale context \autocite{Qiang2024}. Een bedrijf presteert immers nooit in een vacuüm; de financiële gezondheid hangt nauw samen met sectorbrede economische verschuivingen \autocite{Bhattarai2024}. Het handmatig vergelijken van de cijfers van een onderneming met al haar sectorgenoten vormt echter een enorm arbeidsintensief proces, zeker zonder de juiste technologische ondersteuning. Bijgevolg zien analisten sectorbrede trends en vroegtijdige waarschuwingssignalen voor wanbetaling vaak over het hoofd \autocite{Bhattarai2024}. Zoals \textcite{Moscato2021} aangeven, leidt dit gebruik van traditionele en statische methoden vaak tot een suboptimale risico-inschatting, wat aanzienlijke financiële verliezen voor de kredietverstrekker met zich mee kan brengen.
+De huidige werkwijze voor financiële risicoanalyse is overwegend retrospectief. Door sterk te focussen op individuele, historische jaarrekeningen, isoleert het traditionele proces de onderneming van haar bredere sectorale context \autocite{Qiang2024}. Een bedrijf presteert immers nooit in een vacuüm; de financiële gezondheid hangt nauw samen met sectorbrede economische verschuivingen \autocite{Bhattarai2024}. Het handmatig vergelijken van de cijfers van een onderneming met al haar sectorgenoten vormt echter een enorm arbeidsintensief proces, zeker zonder de juiste technologische ondersteuning. Bijgevolg zien analisten sectorbrede trends en vroegtijdige waarschuwingssignalen voor wanbetaling vaak over het hoofd \autocite{Bhattarai2024}. Zoals \textcite{Moscato2021} aangeven, leidt dit gebruik van traditionele en statische methoden vaak tot een suboptimale risico-inschatting, wat aanzienlijke financiële verliezen voor de kredietverstrekker met zich mee kan brengen.
+
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}%
 \label{sec:onderzoeksdoelstelling}
 
-Dit onderzoek heeft als doel de kredietverleningsprocessen binnen banken te optimaliseren door middel van datagedreven technologieën. Het concrete eindresultaat is de ontwikkeling van een Proof of Concept (PoC). Binnen deze PoC verzamelt een geautomatiseerde pijplijn de volledige dataset van de Nationale Bank van België (NBB) van de afgelopen drie jaar, om deze vervolgens in te laden in een schaalbare database. De opzet fungeert als fundament voor experimenten rond sectorbrede benchmarking en predictieve analyses, om te testen of dergelijke methoden een aantoonbare meerwaarde bieden bovenop de klassieke dossierbehandeling.
+Dit onderzoek heeft als doel de kredietverleningsprocessen binnen banken te optimaliseren door middel van datagedreven technologieën. Het concrete eindresultaat is de ontwikkeling van een Proof of Concept (PoC). Binnen deze PoC verzamelt een geautomatiseerde pijplijn de volledige dataset van de Nationale Bank van België (NBB) van de afgelopen drie jaar, om deze vervolgens in te laden in een schaalbare database. De opzet fungeert als fundament voor experimenten rond financiële segmentaties en predictieve analyses, om te testen of dergelijke methoden een aantoonbare meerwaarde bieden bovenop de klassieke dossierbehandeling.
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
 \label{sec:onderzoeksvraag}
@@ -22,15 +23,15 @@ Dit onderzoek heeft als doel de kredietverleningsprocessen binnen banken te opti
 Om tegemoet te komen aan de probleemstelling en de doelstelling te behalen, hanteert dit onderzoek de volgende centrale onderzoeksvraag:
 
 \begin{displayquote}
-In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?
+    In welke mate kan een Big Data-architectuur op basis van publiekelijk beschikbare data bijdragen tot een nauwkeurigere financiële risico-inschatting bij kredietverlening?
 \end{displayquote}
 
 Om deze centrale vraag te structureren en systematisch te beantwoorden, formuleert het onderzoek volgende deelvragen:
 \begin{enumerate}
-    \item Hoe kunnen we de dataset (gratis) opzetten zodat deze bruikbaar is voor verdere data analyse?
-    \item Welke factoren bepalen een zinvolle segmentatie of clustering van ondernemingen om een representatieve sector-benchmark te bekomen?
-    \item Welke machine learning-modellen zijn geschikt om op basis van historische financiële ratio's toekomstige bedrijfsprestaties te voorspellen?
-    \item Welke impact heeft het implementeren van een Big Data-platform op de werkwijze van de financiële analist? Kunnen deze nieuwe modellen helpen om een bedrijf te scoren?
+    \item Op welke manier kan een dataset, gebaseerd op publiek beschikbare NBB-data, worden opgezet zodat deze optimaal bruikbaar is voor verdere data-analyse?
+    \item Hoe kan een zinvolle segmentatie of clustering van ondernemingen worden gerealiseerd, en geniet een functionele dan wel een datagedreven (technische) clustering de voorkeur?
+    \item In welke mate zijn machine learning-modellen, getraind op deze publieke NBB-data, geschikt om toekomstige bedrijfsprestaties te voorspellen op basis van historische financiële ratio's?
+    \item Welke impact heeft de implementatie van een dergelijk Big Data-platform en de bijhorende predictieve modellen op de werkwijze en kredietbeoordeling van de financiële analist?
 \end{enumerate}
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
@@ -40,7 +41,4 @@ De rest van deze bachelorproef is als volgt opgebouwd:
 
 In Hoofdstuk~\ref{ch:stand-van-zaken} volgt een uitgebreid literatuuroverzicht dat de stand van zaken binnen de traditionele ratio-analyse, beschikbare softwareoplossingen en de technologische verschuivingen naar Big Data en Machine Learning in kaart brengt. In Hoofdstuk~\ref{ch:methodologie} verantwoordt de tekst de gekozen onderzoeksstrategie en beschrijft het de vier fasen van de proof of concept.
 
-% TODO: Voeg hier een korte beschrijving toe van je resterende hoofdstukken (bijv. resultaten) zodra je deze uitschrijft. Voorbeeld:
-% In Hoofdstuk 4 wordt de opbouw van de architectuur en de ETL-pijplijn gedocumenteerd, waarna Hoofdstuk 5 de resultaten van de machine learning modellen toelicht.
-
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, geeft het onderzoek een antwoord op de onderzoeksvragen, bediscussieert het de relevantie van de bevindingen voor het werkveld en reikt het suggesties aan voor verder onderzoek.
+Vervolgens documenteert Hoofdstuk~\ref{ch:architectuur} de technische architectuur, de inrichting van het cloud-datawarehouse en de werking van de ETL-pijplijn. Hoofdstuk~\ref{ch:resultaten} evalueert daarna de verzamelde resultaten, met bijzondere aandacht voor de exploratieve sectoranalyse en de accuraatheid van de predictieve machine learning-modellen. In Hoofdstuk~\ref{ch:conclusie}, ten slotte, geeft het onderzoek een sluitend antwoord op de onderzoeksvragen, bediscussieert het de relevantie van de bevindingen voor de financiële sector en reikt het suggesties aan voor vervolgonderzoek.
