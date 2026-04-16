@@ -8,22 +8,57 @@
 Dit onderzoek volgt de methodologie van \textit{design science research} (constructief onderzoek) en omvat de ontwikkeling van een Proof of Concept (PoC). Deze PoC bestaat uit een cloud-architectuur en predictieve modellen met als doel het kredietrisico van ondernemingen accuraat in te schatten. De technologische realisatie steunt voornamelijk op het Google Cloud Platform (waaronder Cloud Storage en BigQuery) vanwege de serverless architectuur, lage kosten en hoge performantie \autocite{GoogleCloud2024}. Voor de datamanipulatie en modeltraining werd gebruikgemaakt van de programmeertaal Python en van SQL. Het onderzoek verliep gestructureerd via vier grote fasen.
 
 \section{Fase 1: Data-ingestie en Engineering}
-In de eerste fase werden data van de Nationale Bank van België (NBB) via het Open Data-portaal verkregen. Om deze ongestructureerde en ruwe data bruikbaar te maken, ontwikkelde het onderzoek een eigen ETL-pipeline (Extract, Transform, Load). Deze pipeline garandeerde volledige controle over de structuur van de data. Een opgeschoonde dataset vormt immers de absolute vereiste om in latere stappen sectoren correct te classificeren en algoritmen effectief te trainen.
+In de eerste fase werden data van de Nationale Bank van België (NBB) via het Open Data-portaal verkregen. Om deze ongestructureerde en ruwe data bruikbaar te maken, ontwikkelde het onderzoek een eigen ETL-pipeline (Extract, Transform, Load:  \ref{app:ETL}). Deze pipeline garandeerde volledige controle over de structuur van de data. Een opgeschoonde dataset vormt immers de absolute vereiste om in latere stappen sectoren correct te classificeren en algoritmen effectief te trainen.
+Ondernemingen konden enkel via hun ondernemingsnummer gekoppeld worden. Aangezien deze identifier ontbrak in
+de bulk-API (https://ws.cbso.nbb.be/extracts/batch/\{date\}/references), diende voor elke Belgische onderneming afzonderlijk een andere API
+(https://ws.cbso.nbb.be/authentic-archive/\{date\}/accountingData) geraadpleegd te worden. Dit werd verwezenlijkt via een asynchroon Python-script.
 
-De technische uitwerking van deze transformaties, waaronder de deduplicatie en het mergen van verschillende bronnen, is terug te vinden in het SQL-script in Bijlage \ref{app:sql_data_prep} (zie Codefragment \ref{lst:sql_data_prep}).
+Na het ophalen werd de data uitgelezen en geherstructureerd. De belangrijkste velden waren hierbij: ondernemingsnummer, jaar van neerlegging, type van neerlegging en de neerlegging zelf. De neerlegging werd opgeslagen in een array-structuur binnen één kolom (Rubrics). Deze nieuwe structuur werd vervolgens per jaar van neerlegging (2020-2025) ingeladen in een eerste ruwe BigQuery dataset (accounts).
 
-\section{Fase 2: Dataselectie en Feature Engineering}
-Ondernemingen konden enkel via hun ondernemingsnummer gelinkt worden aan de Kruispuntbank van Ondernemingen (KBO) voor sectorinformatie (NACE-bel-codes). Aangezien een unieke identifier vaak ontbrak in de bulk-API's, diende voor elke Belgische onderneming afzonderlijk een specifieke API-call uitgevoerd te worden om de data te verrijken.
+Vervolgens werden ook gegevens uit de Kruispuntbank van Ondernemingen (KBO) toegevoegd. Deze bron leverde de volgende dimensies op:
+\begin{enumerate}
+    \item Activiteiten (NACE-code per ondernemingsnummer): deze dimensie werd gebruikt om ondernemingen te koppelen aan een functionele sector.
+    \item Adres (adres van de hoofdvestiging van een onderneming): deze dimensie werd gebruikt voor de geografische indeling van de ondernemingen.
+    \item Onderneming: deze dimensie koppelt een ondernemingsnummer aan een ondernemingsnaam.
+    \item Juridisch: deze dimensie geeft de huidige juridische status van een onderneming weer.
+\end{enumerate}
 
-Aangezien machine learning-modellen voor financiële analyse voldoende historische data per onderneming nodig hebben, werd in samenspraak met de copromotor beslist om enkel bedrijven met minstens drie opeenvolgende neerleggingen te weerhouden. Dit resulteert in twee jaar aan inputdata om de status van het derde jaar te voorspellen. De logica achter deze filtering en de berekening van de financiële ratio's is eveneens gedocumenteerd in Codefragment \ref{lst:sql_data_prep}.
+Hoewel deze KBO-data interessante dimensies toevoegt aan de jaarrekeningen, moet de kanttekening worden gemaakt dat deze data niet historisch is. Het KBO-register werd geraadpleegd op een specifiek meetmoment (20/01/2026), waardoor de vermelde statuten enkel geldig zijn voor die datum. Bij de analyse dient dan ook met voorzichtigheid te worden omgegaan met het combineren van historische en niet-historische feiten.
+Ten slotte werden enkele macro-economische indicatoren van Statbel en de Europese Centrale Bank (ECB) geïntegreerd, namelijk de gemiddelde rentevoet en de gemiddelde Belgische inflatie. Dit waren cruciale parameters voor de periode tussen 2020 en 2025, een tijdspanne die gekenmerkt werd door hoge inflatie en wisselende rentes. Deze werden opgeladen via de UI van BigQuery.
 
-\section{Fase 3: Modeltraining en Validatie}
-Als target voor het model werd een gecombineerde methode gehanteerd, gebaseerd op de ratio's van Altman, Ohlson en de OJD-methode (hoge schuldenlast, operationeel verlies en lage activa). Binnen BigQuery ML werden verschillende algoritmen vergeleken, waaronder een XGBoost-model en een Random Forest-algoritme.
+\section{Fase 2: Groepering en Segmentatie}
+Tijdens de tweede fase clusterde de PoC de ondernemingen in financieel gelijkaardige groepen. Als deel van dit onderzoek werden er modellen ontwikkeld voor zowel traditioneel als algoritmisch gegroepeerde ondernemingen. Eerst werd er handmatig gesegmenteerd op basis van vooraf gedetermineerde parameters die voortvloeiden uit de literatuurstudie, namelijk: bedrijfsgrootte, type model en sector. Vervolgens werd dezelfde dataset algoritmisch geclusterd met behulp van een K-means clusteringmodel, een methode die eveneens geselecteerd werd op basis van de bevindingen uit de literatuurstudie.
+Aangezien machine learning-modellen voor financiële analyse voldoende historische data per onderneming nodig hebben, werd in samenspraak met de copromotor beslist om enkel bedrijven met minstens drie opeenvolgende neerleggingen te weerhouden. Dit resulteert in twee jaar aan inputdata om de status van het derde jaar te voorspellen \ref{lst:sql_data_prep}.
 
+
+\section{Fase 3: Voorspellende Analyse}
+In de laatste fase configureerde en trainde het onderzoek drie predictieve modellen per segment. Dit gebeurde binnen het framework BigQuery ML. De doelstelling hierbij was om op basis van de historische financiële prestaties (bijvoorbeeld het jaar X-2 en X-1) de kritieke ratio's of het risicoprofiel voor jaar X te voorspellen. Ten slotte toetste de onderzoeker de accuraatheid van deze modellen af om te bepalen in welke mate historische NBB-data voldoende voorspellende waarde bevat.
+Tijdens de laatste fase worden predictieve machinelearningmodellen geconfigureerd en getraind om de probabiliteit op financieel falen in te schatten[cite: 5265]. Deze implementatie steunt op het BigQuery ML-framework[cite: 5266]. De doelstelling is om op basis van historische financiële prestaties (bijvoorbeeld boekjaren $X-2$ en $X-1$) de kritieke ratio's of het risicoprofiel voor boekjaar $X$ te voorspellen via binaire logistische regressietechnieken[cite: 5266]. Ten slotte wordt de predictieve performantie van deze modellen geëvalueerd om vast te stellen in welke mate historische NBB-data toereikend zijn voor robuuste kredietrisicomodellering[cite: 5267].
+
+\subsection{Modelkeuze}
+Hoewel het voorspellen van toekomstige bedrijfsstatussen inherent een tijdscomponent bevat, werd geopteerd voor een cross-sectioneel XGBoost-model in plaats van een sequentieel tijdreeksmodel (zoals LSTM). De dataset bestaat uit paneldata met een brede cross-sectionele dimensie ($N$, het aantal bedrijven) maar een zeer beperkte temporele dimensie ($T$, 5 boekjaren). Deze beperkte tijdsdiepte is onvoldoende voor de training van deep learning tijdreeksmodellen. De temporele dynamiek werd in plaats daarvan gecapteerd via feature engineering (het berekenen van \textit{year-over-year} delta's en groeiratio's) en de toevoeging van macro-economische parameters. Hierdoor kan het op beslissingsbomen gebaseerde XGBoost-model de trendmatige evolutie effectief modelleren als $X_t \rightarrow Y_{t+1}$.
+
+\subsection{Datapreparatie}
+De constructie van de trainingsdatasets start met de creatie van een staging-tabel. Deze tabel consolideert de jaarrekeningen over verschillende boekjaren, de KBO-dimensiedata en macro-economische parameters (zoals inflatie en rentevoeten)[cite: 5268, 5269]. Aangezien een onderneming meerdere jaarrekeningen voor eenzelfde boekjaar kan neerleggen, werd een prioriteringslogica toegepast gebaseerd op modeltype, taal en neerleggingsdatum[cite: 5269]. Aan elke onderneming werden maximaal drie primaire NACE-codes toegekend[cite: 5270]. Vervolgens werden de meest predictieve financiële rubrieken geselecteerd van zowel het huidige als het voorgaande boekjaar[cite: 5271]. Om de robuustheid van het model tegen extreme uitbijters (\textit{outliers}) te verhogen, werd op specifieke datapunten winsorisatie (op het 99ste percentiel) toegepast[cite: 5272].
+
+\subsection{Input en Targets}
+Om de modellen te trainen op een representatieve steekproef van zowel start-ups als mature ondernemingen, en gelijktijdig te voorzien in voldoende historische datapunten per entiteit, werd in overleg met de copromotor beslist om uitsluitend bedrijven met minimaal drie geregistreerde neerleggingen in de dataset op te nemen[cite: 5273]. Deze benadering garandeert een historische datareeks van twee aaneengesloten boekjaren als inputvariabelen om de financiële status in het daaropvolgende (derde) jaar te voorspellen[cite: 5273, 5274]. Tevens werden de relatieve varianties tussen jaar 1 en jaar 2 als features geïncorporeerd in de paneldata[cite: 5274]. De afhankelijke variabele (\textit{target}) werd gedefinieerd op basis van een hybride benadering, geïnspireerd door de Altman Z-score, het Ohlson O-score model en de OJD-methode, resulterend in een risico-indicator gebaseerd op hoge schuldenlast, operationeel verlies en een lage activawaarde[cite: 5275].
+
+\subsection{Hyperparameter Tuning}
+Binnen BigQuery ML werd een \textit{grid search} of \textit{random search} procedure toegepast om simultaan meerdere modellen te trainen met uiteenlopende hyperparameterconfiguraties (\texttt{num\_of\_trials})[cite: 5276]. Om de computationele kosten te beheersen, werd het aantal iteraties beperkt tot 10, met als objectieffunctie het maximaliseren van de \textit{Area Under the Receiver Operating Characteristic Curve} (ROC AUC)[cite: 5277]. De volgende hyperparameterruimte werd verkend:
 \subsection{Hyperparameters}
 Om de accuraatheid te maximaliseren en kosten te beheersen, werd gebruikgemaakt van \textit{hyperparameter tuning} binnen BigQuery ML. Volgende parameters werden geoptimaliseerd:
 
 \begin{itemize}
+    \item \textbf{roc\_auc}: De evaluatiemetriek voor het selecteren van het optimale model, specifiek geschikt voor ongebalanceerde datasets[cite: 5278].
+    \item \textbf{max\_tree\_depth}: Gelimiteerd tot maximaal 8 vertakkingen per boom om overfitting (het memoriseren van de trainingsdata) te reduceren[cite: 5278].
+    \item \textbf{learn\_rate}: Geconfigureerd tussen 0.1 en 0.2 om een optimaal compromis te vinden tussen convergentiesnelheid en predictieve accuraatheid[cite: 5279].
+    \item \textbf{colsample\_bytree}: Variërend tussen 0.6 en 1. Dit dwingt het ensemble-model om over diverse sub-featuresets te generaliseren en voorkomt overmatige afhankelijkheid van één dominante parameter[cite: 5279].
+    \item \textbf{early\_stop}: Geactiveerd (TRUE) om het trainingsproces voortijdig te staken wanneer de loss-functie niet langer significant verbetert, wat leidt tot efficiënter resourcegebruik[cite: 5280].
+    \item \textbf{subsample}: Variërend tussen 0.6 en 1. Introduceert stochasticiteit door elke iteratie te trainen op een willekeurige subset van de ondernemingen, wat de generalisatie bevordert[cite: 5280].
+    \item \textbf{max\_iterations}: Een harde limiet van 100 opeenvolgende bomen in het ensemble[cite: 5281].
+    \item \textbf{l2\_reg}: L2-regularisatie (Ridge) toegepast om disproportioneel grote gewichten, veelal veroorzaakt door niet-geschaalde variabelen, te penaliseren[cite: 5281].
+    \item \textbf{auto\_class\_weights}: Een essentiële parameter die de gewichten van de klassen automatisch balanceert, wat cruciaal is bij het trainen op sterk asymmetrische kredietrisicodata[cite: 5281].
     \item \textbf{roc\_auc}: De primaire metriek om het beste model te selecteren in een ongebalanceerde dataset.
     \item \textbf{max\_tree\_depth}: Gelimiteerd tot maximaal 8 vertakkingen per boom om overfitting te reduceren.
     \item \textbf{learn\_rate}: Geconfigureerd tussen 0.1 en 0.2 voor een balans tussen snelheid en accuraatheid.
@@ -33,5 +68,3 @@ Om de accuraatheid te maximaliseren en kosten te beheersen, werd gebruikgemaakt 
     \item \textbf{max\_iterations}: Een harde limiet van 100 bomen per ensemble.
 \end{itemize}
 
-\section{Fase 4: Evaluatie en Rapportage}
-In de laatste fase werden de resultaten van de getrainde modellen geëvalueerd op basis van een testset die niet werd gebruikt tijdens de training. Hierbij werd specifiek gekeken naar de precisie en de recall voor het identificeren van risicovolle ondernemingen, waarna de conclusies werden vertaald naar een cloud-native architectuurvoorstel.

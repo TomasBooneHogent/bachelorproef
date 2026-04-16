@@ -44,7 +44,7 @@
 \cosupervisor{Dhr. T. Vanhooren}
 \title[Een Proof of Concept op Basis van NBB-Data]%
     {Big Data voor Kredietrisicoanalyse}
-\academicyear{2023--2024} % Pas eventueel aan naar het huidige academiejaar
+\academicyear{2025--2026} % Pas eventueel aan naar het huidige academiejaar
 \examperiod{1}
 \degreesought{\IfLanguageName{dutch}{Professionele bachelor in de toegepaste informatica}{Bachelor of applied computer science}}
 \partialthesis{false} %% To display 'in partial fulfilment'
@@ -96,24 +96,37 @@
 
 %---------- Bijlagen -----------------------------------------------------------
 \appendix
+\chapter{Opladen NBB en KBO data}
+\label{app:ETL}
 
-\chapter{BigQuery SQL Data Preparatie}
+Hier volgt de Python code gebruikt voor het extraheren, transformeren en opladen in BigQuery van zowel NBB als KBO data.
+
+\begin{center}
+    \captionof{listing}{Python script voor het opladen van NBB jaarrekeningen}
+    \label{lst:ETL}
+    \inputminted[
+        fontsize=\scriptsize,
+        linenos,
+        breaklines,
+        tabsize=4
+    ]{python}{code/python/process_and_upload.py}
+\end{center}
+
+\chapter{SQL Data Preparatie}
 \label{app:sql_data_prep}
 
 Onderstaand SQL-script werd gebruikt in Google BigQuery voor de deduplicatie, opschoning en transformatie van de NBB- en KBO-data.
 
-\begin{listing}[H] % De [H] dwingt de code op deze plek te blijven
+\begin{center}
+    \captionof{listing}{SQL-script voor datatransformatie en deduplicatie in BigQuery}
+    \label{lst:sql_data_prep}
     \inputminted[
         fontsize=\scriptsize,
         linenos,
         breaklines,
         tabsize=4
     ]{sql}{code/SQL/creatie_staging_tabel.sql}
-    \caption{SQL-script voor datatransformatie en deduplicatie in BigQuery}
-    \label{lst:sql_data_prep}
-\end{listing}
-
-
+\end{center}
 %%---------- Backmatter, referentielijst ---------------------------------------
 \backmatter{}
 
