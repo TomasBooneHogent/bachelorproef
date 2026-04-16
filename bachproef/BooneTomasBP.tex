@@ -11,10 +11,11 @@
 \graphicspath{{../graphics/}}
 
 %% For source code highlighting, requires pygments to be installed
-\usepackage[chapter,outputdir=../output]{minted}
+
+%% Gebruik GEEN outputdir bij gebruik van de HOGENT Docker-container
+\usepackage[chapter]{minted}
 \usemintedstyle{solarized-light}
 
-%% Formatting for minted environments.
 \setminted{%
     autogobble,
     frame=lines,
@@ -23,6 +24,7 @@
     tabsize=4
 }
 
+
 %% Ensure the list of listings is in the table of contents
 \renewcommand\listoflistingscaption{%
     \IfLanguageName{dutch}{Lijst van codefragmenten}{List of listings}
@@ -30,11 +32,11 @@
 \renewcommand\listingscaption{%
     \IfLanguageName{dutch}{Codefragment}{Listing}
 }
+
 \renewcommand*\listoflistings{%
     \cleardoublepage\phantomsection\addcontentsline{toc}{chapter}{\listoflistingscaption}%
     \listof{listing}{\listoflistingscaption}%
 }
-
 
 %%---------- Document metadata -------------------------------------------------
 \author{Tomas Boone}
@@ -42,7 +44,7 @@
 \cosupervisor{Dhr. T. Vanhooren}
 \title[Een Proof of Concept op Basis van NBB-Data]%
     {Big Data voor Kredietrisicoanalyse}
-\academicyear{2023--2024} % Aangepast naar recenter jaar, check of dit klopt
+\academicyear{2023--2024} % Pas eventueel aan naar het huidige academiejaar
 \examperiod{1}
 \degreesought{\IfLanguageName{dutch}{Professionele bachelor in de toegepaste informatica}{Bachelor of applied computer science}}
 \partialthesis{false} %% To display 'in partial fulfilment'
@@ -92,15 +94,25 @@
 \input{resultaten}
 \input{conclusie}
 
-
-
 %---------- Bijlagen -----------------------------------------------------------
 \appendix
 
-\chapter{Onderzoeksvoorstel}
-Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat vooraf werd beoordeeld door de promotor. Dat voorstel is opgenomen in deze bijlage.
+\chapter{BigQuery SQL Data Preparatie}
+\label{app:sql_data_prep}
 
-\input{../voorstel/voorstel-inhoud}
+Onderstaand SQL-script werd gebruikt in Google BigQuery voor de deduplicatie, opschoning en transformatie van de NBB- en KBO-data.
+
+\begin{listing}[H] % De [H] dwingt de code op deze plek te blijven
+    \inputminted[
+        fontsize=\scriptsize,
+        linenos,
+        breaklines,
+        tabsize=4
+    ]{sql}{code/SQL/creatie_staging_tabel.sql}
+    \caption{SQL-script voor datatransformatie en deduplicatie in BigQuery}
+    \label{lst:sql_data_prep}
+\end{listing}
+
 
 %%---------- Backmatter, referentielijst ---------------------------------------
 \backmatter{}
