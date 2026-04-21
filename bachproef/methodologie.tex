@@ -129,13 +129,15 @@ Om de modellen te trainen op een representatieve steekproef van zowel start-ups 
 De afhankelijke variabele (\textit{target}) werd gedefinieerd op basis van een hybride benadering, geïnspireerd door de Altman Z-score, het Ohlson O-score model en de OJD-methode, resulterend in een risico-indicator gebaseerd op hoge schuldenlast, operationeel verlies en een lage activawaarde.
 
 \begin{lstlisting}[language=SQL, caption={Model configuratie en target definitie}, label={lst:creatie XGBoost model}]
+
 CREATE OR REPLACE MODEL `corpscore-be.staging.credit_risk_xgboost_model_v4_tuned`
 OPTIONS(
   model_type = 'BOOSTED_TREE_CLASSIFIER',
   input_label_cols = ['is_high_risk'],
  
   -- Hyperparameter Tuning
-  num_trials = 10,                    
+  num_trials = 10,
+  hparam_tuning_algorithm = 'VIZIER_DEFAULT', -- Dit is de correcte waarde voor Bayesian Search                    
   hparam_tuning_objectives = ['roc_auc'],
   max_tree_depth = HPARAM_RANGE(3, 8),      
   learn_rate = HPARAM_RANGE(0.01, 0.2),    
@@ -176,15 +178,19 @@ SELECT
   END AS is_high_risk
 
 FROM `corpscore-be.staging.ml_training_data_3yr_window`
+-- TRAIN EXCLUSIEF OP HET VERLEDEN (Out-of-Time split)
 WHERE target_year_y3 <= 2023
   AND (
     target_solvency_y3 IS NOT NULL
     OR target_liquidity_y3 IS NOT NULL
     OR target_roa_y3 IS NOT NULL
   );
+
+
+
 \end{lstlisting}
 \subsection{Hyperparameter Tuning}
-Binnen BigQuery ML werd een \textit{grid search} of \textit{random search} procedure toegepast om simultaan meerdere modellen te trainen met uiteenlopende hyperparameterconfiguraties (\texttt{num\_of\_trials}). Om de computationele kosten te beheersen, werd het aantal iteraties beperkt tot 10, met als objectieffunctie het maximaliseren van de \textit{Area Under the Receiver Operating Characteristic Curve} (ROC AUC). De volgende hyperparameterruimte werd verkend:
+Binnen BigQuery ML werd een \textit{Bayesian search} of \textit{random search} procedure toegepast om simultaan meerdere modellen te trainen met uiteenlopende hyperparameterconfiguraties (\texttt{num\_of\_trials}). Om de computationele kosten te beheersen, werd het aantal iteraties beperkt tot 10, met als objectieffunctie het maximaliseren van de \textit{Area Under the Receiver Operating Characteristic Curve} (ROC AUC). De volgende hyperparameterruimte werd verkend:
 \subsection{Hyperparameters}
 Om de accuraatheid te maximaliseren en kosten te beheersen, werd gebruikgemaakt van \textit{hyperparameter tuning} binnen BigQuery ML. Volgende parameters werden geoptimaliseerd:
 
