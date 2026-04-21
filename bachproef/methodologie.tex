@@ -20,9 +20,38 @@ diende voor elke Belgische onderneming afzonderlijk een specifieke API geraadple
 \begin{quote}
     \url{https://ws.cbso.nbb.be/authentic-archive/{date}/accountingData}
 \end{quote}
-Dit werd verwezenlijkt via een asynchroon Python-script. Het belang van deze grondige data-acquisitie wordt onderstreept door het feit dat kwalitatieve data essentieel is voor de nauwkeurigheid van de uiteindelijke voorspellingen[cite: 37, 46].
+Dit werd verwezenlijkt via een asynchroon Python-script.
 
-Na het ophalen werd de data uitgelezen en geherstructureerd. De belangrijkste velden waren hierbij: ondernemingsnummer, jaar van neerlegging, type van neerlegging en de neerlegging zelf. De neerlegging werd opgeslagen in een array-structuur binnen één kolom (\texttt{Rubrics}). Deze nieuwe structuur werd vervolgens per jaar van neerlegging (2020--2025) ingeladen in een eerste ruwe BigQuery dataset (\texttt{accounts}).
+De kern van de data-ingestie wordt gevormd door de \texttt{main}-functie, die verantwoordelijk is voor het asynchroon aanroepen van de NBB API en het wegschrijven van de resultaten naar BigQuery. Net als in de methodologie van vergelijkbare studies naar kredietrisico, waarbij efficiënte data-acquisitie centraal staat[cite: 383, 392], maakt dit script gebruik van parallellisatie om de verwerkingstijd te minimaliseren.
+
+\begin{lstlisting}[language=Python, caption={Hoofdlogica van de ETL-pipeline voor data-extractie}, label={lst:main_logic}]
+def main():
+    api_client = AuthenticApiClient(pool_size=MAX_WORKERS)
+    bq_client = BigQueryClient()
+    processed_entities = load_processed_entities()
+
+    try:
+        df_csv = pd.read_csv(CSV_PATH)
+        all_entities = [str(e) for e in df_csv['EnterpriseNumber'].unique()]
+        entities_to_process = [e for e in all_entities if e not in processed_entities]
+        logger.info(f"Total to process: {len(entities_to_process)} (Resuming from {len(processed_entities)})")
+    except Exception as e:
+        logger.error(f"CSV Load Error: {e}"); return
+
+    for year in YEARS_TO_PROCESS:
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            for entity in entities_to_process:
+                executor.submit(process_and_upload_entity, entity, year, api_client, bq_client)
+
+        with accumulator_lock:
+            if rows_accumulator:
+                upload_batch(rows_accumulator, bq_client, year)
+                rows_accumulator.clear()
+\end{lstlisting}
+
+Het gebruik van de \texttt{ThreadPoolExecutor} (regel 15) zorgt ervoor dat meerdere ondernemingsnummers gelijktijdig verwerkt worden, wat essentieel is gezien de omvang van de dataset van 150.000 rijen[cite: 163, 404].
+
+Na het ophalen werd de data uitgelezen en geherstructureerd. De belangrijkste velden waren hierbij: ondernemingsnummer, jaar van neerlegging, type van neerlegging en de neerlegging zelf. De neerlegging werd opgeslagen in een array-structuur binnen één kolom (\texttt{Rubrics}). Dit werd per jaar van neerlegging (2020--2025) ingeladen in een eerste ruwe BigQuery dataset (\texttt{accounts}).
 
 Vervolgens werden ook gegevens uit de Kruispuntbank van Ondernemingen (KBO) toegevoegd. Deze bron leverde de volgende dimensies op:
 \begin{enumerate}
