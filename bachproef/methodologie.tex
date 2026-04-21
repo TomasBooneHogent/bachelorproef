@@ -7,9 +7,7 @@
 
 Dit onderzoek volgt de methodologie van \textit{design science research} (constructief onderzoek) en omvat de ontwikkeling van een Proof of Concept (PoC). Deze PoC bestaat uit een cloud-architectuur en predictieve modellen met als doel het kredietrisico van ondernemingen accuraat in te schatten. De technologische realisatie steunt voornamelijk op het Google Cloud Platform (waaronder Cloud Storage en BigQuery) vanwege de serverless architectuur, lage kosten en hoge performantie \autocite{GoogleCloud2024}. Voor de datamanipulatie en modeltraining werd gebruikgemaakt van de programmeertaal Python en van SQL. Het onderzoek verliep gestructureerd via vier grote fasen.
 
-% Voeg dit toe aan je preamble voor de beste resultaten:
-% \usepackage{xurl} % Zorgt voor betere regelafbreking van lange URL's
-% \usepackage{hyperref}
+
 
 \section{Fase 1: Data-ingestie en Engineering}
 In de eerste fase werden data van de Nationale Bank van België (NBB) via het Open Data-portaal verkregen. Om deze ongestructureerde en ruwe data bruikbaar te maken, ontwikkelde het onderzoek een eigen ETL-pipeline (Extract, Transform, Load: \ref{app:ETL}). Deze pipeline garandeerde volledige controle over de structuur van de data. Een opgeschoonde dataset vormt immers de absolute vereiste om in latere stappen sectoren correct te classificeren en algoritmen effectief te trainen[cite: 118, 165].
