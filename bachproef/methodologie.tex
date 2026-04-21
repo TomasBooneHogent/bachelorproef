@@ -20,9 +20,8 @@ diende voor elke Belgische onderneming afzonderlijk een specifieke API geraadple
 \begin{quote}
     \url{https://ws.cbso.nbb.be/authentic-archive/{date}/accountingData}
 \end{quote}
-Dit werd verwezenlijkt via een asynchroon Python-script.
 
-De kern van de data-ingestie wordt gevormd door de \texttt{main}-functie, die verantwoordelijk is voor het asynchroon aanroepen van de NBB API en het wegschrijven van de resultaten naar BigQuery. Net als in de methodologie van vergelijkbare studies naar kredietrisico, waarbij efficiënte data-acquisitie centraal staat[cite: 383, 392], maakt dit script gebruik van parallellisatie om de verwerkingstijd te minimaliseren.
+De kern van de data-ingestie wordt gevormd door de \texttt{main}-functie, die verantwoordelijk is voor het asynchroon aanroepen van de NBB API en het wegschrijven van de resultaten naar BigQuery.Dit script gebruikt parallellisatie om de verwerkingstijd te minimaliseren.
 
 \begin{lstlisting}[language=Python, caption={Hoofdlogica van de ETL-pipeline voor data-extractie}, label={lst:main_logic}]
 def main():
@@ -49,8 +48,8 @@ def main():
                 rows_accumulator.clear()
 \end{lstlisting}
 
-Het gebruik van de \texttt{ThreadPoolExecutor} (regel 15) zorgt ervoor dat meerdere ondernemingsnummers gelijktijdig verwerkt worden, wat essentieel is gezien de omvang van de dataset van 150.000 rijen[cite: 163, 404].
-
+Het gebruik van de \texttt{ThreadPoolExecutor} (regel 15) zorgt ervoor dat meerdere ondernemingsnummers gelijktijdig verwerkt worden, wat essentieel is gezien de omvang van de dataset van meer dan 1 miljoen ondernemingen.
+\newline
 Na het ophalen werd de data uitgelezen en geherstructureerd. De belangrijkste velden waren hierbij: ondernemingsnummer, jaar van neerlegging, type van neerlegging en de neerlegging zelf. De neerlegging werd opgeslagen in een array-structuur binnen één kolom (\texttt{Rubrics}). Dit werd per jaar van neerlegging (2020--2025) ingeladen in een eerste ruwe BigQuery dataset (\texttt{accounts}).
 
 Vervolgens werden ook gegevens uit de Kruispuntbank van Ondernemingen (KBO) toegevoegd. Deze bron leverde de volgende dimensies op:
@@ -65,7 +64,50 @@ Hoewel deze KBO-data interessante dimensies toevoegt aan de jaarrekeningen, moet
 Ten slotte werden enkele macro-economische indicatoren van Statbel en de Europese Centrale Bank (ECB) geïntegreerd, namelijk de gemiddelde rentevoet en de gemiddelde Belgische inflatie. Dit waren cruciale parameters voor de periode tussen 2020 en 2025, een tijdspanne die gekenmerkt werd door hoge inflatie en wisselende rentes. Deze werden opgeladen via de UI van BigQuery.
 
 \section{Fase 2: Groepering en Segmentatie}
-Tijdens de tweede fase clusterde de PoC de ondernemingen in financieel gelijkaardige groepen. Als deel van dit onderzoek werden er modellen ontwikkeld voor zowel traditioneel als algoritmisch gegroepeerde ondernemingen. Eerst werd er handmatig gesegmenteerd op basis van vooraf gedetermineerde parameters die voortvloeiden uit de literatuurstudie, namelijk: bedrijfsgrootte, type model en sector. Vervolgens werd dezelfde dataset algoritmisch geclusterd met behulp van een K-means clusteringmodel, een methode die eveneens geselecteerd werd op basis van de bevindingen uit de literatuurstudie.
+Tijdens de tweede fase clusterde de PoC de ondernemingen in financieel gelijkaardige groepen. Als deel van dit onderzoek werden er modellen ontwikkeld voor zowel traditioneel als algoritmisch gegroepeerde ondernemingen. Eerst werd er handmatig gesegmenteerd op basis van vooraf gedetermineerde parameters die voortvloeiden uit de literatuurstudie, namelijk: bedrijfsgrootte, type model en sector.
+\begin{lstlisting}[language=SQL, caption={Logica voor tovoegen van kenmerkende parameters}, label={lst:activity clustering}]
+
+-- RANKING: Identify main activities
+  ranked_activities AS (
+    SELECT
+      EnterpriseNumber,
+      NaceCode,
+      ActivityGroup,
+      ROW_NUMBER() OVER (
+        PARTITION BY EnterpriseNumber
+        ORDER BY
+          CASE
+            WHEN ActivityGroup = '001' THEN 1
+            WHEN ActivityGroup = '003' THEN 2
+            WHEN ActivityGroup = '006' THEN 3
+            ELSE 99
+          END ASC,
+          NaceCode ASC
+      ) AS rn
+    FROM `corpscore-be.kbo.dim_activity`
+    WHERE NaceVersion = '2025' AND Classification = 'MAIN' AND ActivityGroup IN ('001', '003', '006')
+  ),
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption={Logica voor tovoegen van kenmerkende parameters}, label={lst:size clustering}]
+
+-- RANKING: Identify main activities
+
+ -- SEGMENTATION
+  CASE
+    WHEN COALESCE(f.total_assets_n, 0) < 1000 AND COALESCE(f.revenue_n, 0) < 1000 THEN 'Inactive/Empty'
+    WHEN COALESCE(f.personnel_fte_n, 0) = 0 AND COALESCE(f.total_assets_n, 0) > 500000 THEN 'Holding'
+    WHEN ((CASE WHEN COALESCE(f.total_assets_n, 0) > 350000 THEN 1 ELSE 0 END) + (CASE WHEN COALESCE(f.revenue_n, 0) > 700000 THEN 1 ELSE 0 END) + (CASE WHEN COALESCE(f.personnel_fte_n, 0) > 10 THEN 1 ELSE 0 END)) <= 1 THEN 'Micro'
+    WHEN ((CASE WHEN COALESCE(f.total_assets_n, 0) > 4500000 THEN 1 ELSE 0 END) + (CASE WHEN COALESCE(f.revenue_n, 0) > 9000000 THEN 1 ELSE 0 END) + (CASE WHEN COALESCE(f.personnel_fte_n, 0) > 50 THEN 1 ELSE 0 END)) <= 1 THEN 'SME'
+    ELSE 'Large'
+  END AS company_segment
+
+
+
+\end{lstlisting}
+
+Vervolgens werd dezelfde dataset algoritmisch geclusterd met behulp van een K-means clusteringmodel, een methode die eveneens geselecteerd werd op basis van de bevindingen uit de literatuurstudie.
 Aangezien machine learning-modellen voor financiële analyse voldoende historische data per onderneming nodig hebben, werd in samenspraak met de copromotor beslist om enkel bedrijven met minstens drie opeenvolgende neerleggingen te weerhouden. Dit resulteert in twee jaar aan inputdata om de status van het derde jaar te voorspellen \ref{lst:sql_data_prep}.
 
 
