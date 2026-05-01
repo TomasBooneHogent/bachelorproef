@@ -1,0 +1,180 @@
+\begin{table}[ht]
+    \centering
+    \caption{Overzicht van K-means Centroids en Features (Gefilterd op >5000 ondernemingen)}
+    \label{tab:features_k_means}
+    \setlength{\tabcolsep}{2pt} % Verkleint de ruimte tussen kolommen om alles te laten passen
+    \begin{tabularx}{\textwidth}{@{} r *{10}{X} r @{}}
+        \toprule
+        \textbf{ID} & \textbf{Rev\_y2} & \textbf{Equity} & \textbf{Profit\_y1} & \textbf{Profit\_y2} & \textbf{$\Delta$Rev} & \textbf{$\Delta$Cust} & \textbf{$\Delta$Inv} & \textbf{$\Delta$Liq\_C} & \textbf{$\Delta$Liq\_S} & \textbf{$\Delta$Supp} & \textbf{Count} \\
+        \midrule
+        \footnotesize \textbf{9} & 
+        \cellcolor[HTML]{F9FCFA}\footnotesize 18.82 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 106k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 15k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 14k & 
+        \cellcolor[HTML]{FCFEFD}\footnotesize -6.24 & 
+        \cellcolor[HTML]{FDFFFE}\footnotesize -332 & 
+        \cellcolor[HTML]{E0F3E9}\footnotesize -1.51 & 
+        \footnotesize -0.32 & 
+        \cellcolor[HTML]{A8DCC2}\footnotesize 0.38 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.92 & 
+        \footnotesize 90163 \\
+        
+        \footnotesize \textbf{23} & 
+        \cellcolor[HTML]{FBFDFC}\footnotesize 18.99 & 
+        \cellcolor[HTML]{FAFDFC}\footnotesize 629k & 
+        \cellcolor[HTML]{F8FDFA}\footnotesize 82k & 
+        \cellcolor[HTML]{F7FCFA}\footnotesize 86k & 
+        \cellcolor[HTML]{FEFFFE}\footnotesize -6.30 & 
+        \cellcolor[HTML]{FEFFFE}\footnotesize -336 & 
+        \cellcolor[HTML]{E0F3E9}\footnotesize -1.52 & 
+        \footnotesize -0.24 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -12.52 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.94 & 
+        \footnotesize 44377 \\
+
+        \footnotesize \textbf{10} & 
+        \cellcolor[HTML]{E9F6EF}\footnotesize 17.74 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 156k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 10k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 9k & 
+        \cellcolor[HTML]{F5FBF8}\footnotesize -5.98 & 
+        \cellcolor[HTML]{F9FDFB}\footnotesize -315 & 
+        \cellcolor[HTML]{E3F4EB}\footnotesize -2.13 & 
+        \footnotesize -0.14 & 
+        \cellcolor[HTML]{B8E3CE}\footnotesize -2.07 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.92 & 
+        \footnotesize 25842 \\
+
+        \footnotesize 32 & 
+        \cellcolor[HTML]{F0F9F5}\footnotesize 18.25 & 
+        \cellcolor[HTML]{F3FAF7}\footnotesize 1.4M & 
+        \cellcolor[HTML]{F6FCF9}\footnotesize 109k & 
+        \cellcolor[HTML]{F6FCF9}\footnotesize 103k & 
+        \cellcolor[HTML]{F8FCFA}\footnotesize -6.08 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -342 & 
+        \cellcolor[HTML]{E7F5EE}\footnotesize -2.96 & 
+        \footnotesize -0.03 & 
+        \cellcolor[HTML]{ACDEC6}\footnotesize -0.32 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.93 & 
+        \footnotesize 20178 \\
+
+        \footnotesize 30 & 
+        \cellcolor[HTML]{FBFDFC}\footnotesize 18.97 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 106k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 13k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 15k & 
+        \cellcolor[HTML]{FDFEFD}\footnotesize -6.25 & 
+        \cellcolor[HTML]{F0F9F5}\footnotesize -279 & 
+        \cellcolor[HTML]{DAF0E6}\footnotesize -0.36 & 
+        \footnotesize -0.28 & 
+        \cellcolor[HTML]{9CD7BA}\footnotesize 2.14 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -11.65 & 
+        \footnotesize 15901 \\
+
+        \footnotesize 26 & 
+        \cellcolor[HTML]{F6FBF8}\footnotesize 18.62 & 
+        \cellcolor[HTML]{DFF2E9}\footnotesize 3.5M & 
+        \cellcolor[HTML]{E6F5ED}\footnotesize 276k & 
+        \cellcolor[HTML]{E3F4EC}\footnotesize 286k & 
+        \cellcolor[HTML]{B6E2CD}\footnotesize -3.75 & 
+        \cellcolor[HTML]{57BB8A}\footnotesize 335.15 & 
+        \cellcolor[HTML]{D8F0E4}\footnotesize 0.15 & 
+        \footnotesize -0.03 & 
+        \cellcolor[HTML]{A9DCC3}\footnotesize 0.19 & 
+        \cellcolor[HTML]{D2EDE0}\footnotesize -8.95 & 
+        \footnotesize 15211 \\
+
+        \footnotesize 18 & 
+        \cellcolor[HTML]{57BB8A}\footnotesize 7.80 & 
+        \cellcolor[HTML]{57BB8A}\footnotesize 18M & 
+        \cellcolor[HTML]{57BB8A}\footnotesize 1.7M & 
+        \cellcolor[HTML]{57BB8A}\footnotesize 1.6M & 
+        \cellcolor[HTML]{57BB8A}\footnotesize -0.37 & 
+        \cellcolor[HTML]{9ED8BC}\footnotesize 50.79 & 
+        \cellcolor[HTML]{57BB8A}\footnotesize 27.38 & 
+        \footnotesize 0.15 & 
+        \cellcolor[HTML]{A9DDC4}\footnotesize 0.14 & 
+        \cellcolor[HTML]{57BB8A}\footnotesize -1.76 & 
+        \footnotesize 14411 \\
+
+        \footnotesize 27 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 19.22 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 162k & 
+        \cellcolor[HTML]{FDFFFE}\footnotesize 32k & 
+        \cellcolor[HTML]{FDFEFE}\footnotesize 34k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -6.36 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -339 & 
+        \cellcolor[HTML]{E2F4EB}\footnotesize -1.96 & 
+        \footnotesize -0.35 & 
+        \cellcolor[HTML]{A0D9BD}\footnotesize 1.55 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.92 & 
+        \footnotesize 10584 \\
+
+        \footnotesize 20 & 
+        \cellcolor[HTML]{EDF7F2}\footnotesize 18.01 & 
+        \cellcolor[HTML]{F5FBF8}\footnotesize 1.2M & 
+        \cellcolor[HTML]{EFF9F4}\footnotesize 179k & 
+        \cellcolor[HTML]{EDF8F3}\footnotesize 183k & 
+        \cellcolor[HTML]{F6FCF9}\footnotesize -6.02 & 
+        \cellcolor[HTML]{FAFDFC}\footnotesize -322 & 
+        \cellcolor[HTML]{E3F4EC}\footnotesize -2.24 & 
+        \footnotesize -0.28 & 
+        \cellcolor[HTML]{ACDEC5}\footnotesize -0.20 & 
+        \cellcolor[HTML]{F2FAF6}\footnotesize -10.87 & 
+        \footnotesize 10051 \\
+
+        \footnotesize 15 & 
+        \cellcolor[HTML]{FDFEFE}\footnotesize 19.15 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 126k & 
+        \cellcolor[HTML]{FEFFFE}\footnotesize 25k & 
+        \cellcolor[HTML]{FEFFFE}\footnotesize 25k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -6.33 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -338 & 
+        \cellcolor[HTML]{E2F4EB}\footnotesize -2.02 & 
+        \footnotesize -0.29 & 
+        \cellcolor[HTML]{AADDC4}\footnotesize 0.12 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.92 & 
+        \footnotesize 9633 \\
+
+        \footnotesize 3 & 
+        \cellcolor[HTML]{F5FBF8}\footnotesize 18.59 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 97k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 7k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 9k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -6.34 & 
+        \cellcolor[HTML]{F9FDFB}\footnotesize -314 & 
+        \cellcolor[HTML]{E2F4EB}\footnotesize -2.00 & 
+        \footnotesize -0.19 & 
+        \cellcolor[HTML]{57BB8A}\footnotesize 12.17 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.92 & 
+        \footnotesize 8788 \\
+
+        \footnotesize 1 & 
+        \cellcolor[HTML]{DDF1E7}\footnotesize 16.96 & 
+        \cellcolor[HTML]{EEF8F3}\footnotesize 1.9M & 
+        \cellcolor[HTML]{FEFFFE}\footnotesize 28k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 11k & 
+        \cellcolor[HTML]{DCF1E7}\footnotesize -5.10 & 
+        \cellcolor[HTML]{DBF1E6}\footnotesize -196 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize -8.23 & 
+        \footnotesize 1.01 & 
+        \cellcolor[HTML]{ACDEC5}\footnotesize -0.24 & 
+        \cellcolor[HTML]{F1FAF5}\footnotesize -10.78 & 
+        \footnotesize 6734 \\
+
+        \footnotesize 8 & 
+        \cellcolor[HTML]{F7FBF9}\footnotesize 18.69 & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 61k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 13k & 
+        \cellcolor[HTML]{FFFFFF}\footnotesize 7k & 
+        \cellcolor[HTML]{FBFEFD}\footnotesize -6.20 & 
+        \cellcolor[HTML]{FDFEFE}\footnotesize -332 & 
+        \cellcolor[HTML]{E2F4EB}\footnotesize -1.95 & 
+        \footnotesize -0.28 & 
+        \cellcolor[HTML]{ACDEC5}\footnotesize -0.24 & 
+        \cellcolor[HTML]{F3FBF7}\footnotesize -10.92 & 
+        \footnotesize 5330 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

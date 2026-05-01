@@ -2,15 +2,17 @@
 % LaTeX sjabloon voor de bachelorproef toegepaste informatica aan HOGENT
 % Meer info op https://github.com/HoGentTIN/latex-hogent-report
 %===============================================================================
-
+\usepackage{tabularx}
+\PassOptionsToPackage{table}{xcolor} % <--- DIT MOET HIER
 \documentclass[dutch,dit,thesis]{hogentreport}
-
 \usepackage{lipsum} % For blind text, can be removed after adding actual content
+\usepackage{csvsimple}
+\usepackage{colortbl}
 
 %% Pictures to include in the text can be put in the graphics/ folder
 \graphicspath{{../graphics/}}
 \usepackage{listings}
-\usepackage{xcolor}
+\usepackage{booktabs}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -91,7 +93,6 @@
 
 \usepackage{xurl}
 \usepackage{hyperref}
-\usepackage{color}
 %% Content starts here.
 \begin{document}
 
